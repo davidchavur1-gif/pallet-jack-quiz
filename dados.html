@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Dados — Python random</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f1e;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.wrap{max-width:480px;width:100%;text-align:center}
+h1{font-size:26px;font-weight:800;color:#fff;margin-bottom:6px}
+.sub{font-size:14px;color:#64748b;margin-bottom:28px}
+.dados-row{display:flex;justify-content:center;gap:24px;margin-bottom:28px}
+.dado{width:110px;height:110px;background:#111827;border:2px solid #1e293b;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:58px;transition:transform 0.1s;user-select:none;box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.dado.rolling{animation:roll 0.5s ease}
+@keyframes roll{0%{transform:rotate(0) scale(1)}25%{transform:rotate(-15deg) scale(0.9)}50%{transform:rotate(15deg) scale(1.1)}75%{transform:rotate(-10deg) scale(0.95)}100%{transform:rotate(0) scale(1)}}
+.suma-box{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:18px 32px;display:inline-block;margin-bottom:24px;min-width:180px}
+.suma-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#64748b;margin-bottom:4px}
+.suma-val{font-size:42px;font-weight:800;color:#3d7fff;transition:all 0.3s}
+.btn{background:#0055ff;color:#fff;border:none;border-radius:12px;padding:15px 40px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-bottom:24px;display:inline-block}
+.btn:hover{background:#3d7fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,85,255,0.35)}
+.btn:active{transform:scale(0.97)}
+.code-box{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:16px 20px;text-align:left;margin-bottom:24px;font-family:'Courier New',monospace;font-size:13px;color:#94a3b8;line-height:1.9}
+.kw{color:#f472b6;font-weight:700}
+.fn{color:#3d7fff;font-weight:700}
+.cm{color:#475569}
+.st{color:#34d399}
+.historial{background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:16px;text-align:left;max-height:200px;overflow-y:auto}
+.hist-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#64748b;margin-bottom:10px}
+.hist-item{font-size:13px;color:#94a3b8;padding:5px 0;border-bottom:1px solid #1e293b;font-family:'Courier New',monospace}
+.hist-item:last-child{border-bottom:none}
+.hist-suma{color:#3d7fff;font-weight:700}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+.stat{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:12px}
+.stat-n{font-size:22px;font-weight:800;color:#fff}
+.stat-l{font-size:11px;color:#64748b;margin-top:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎲 Simulador de Dados</h1>
+  <p class="sub">Ejercicio Python — módulo <code style="color:#3d7fff">random</code> · lanzamiento de 2 dados</p>
+
+  <div class="code-box">
+    <span class="kw">import</span> random<br><br>
+    dado1 = random.<span class="fn">randint</span>(<span class="st">1</span>, <span class="st">6</span>)<br>
+    dado2 = random.<span class="fn">randint</span>(<span class="st">1</span>, <span class="st">6</span>)<br>
+    suma = dado1 + dado2<br><br>
+    <span class="cm"># Resultado:</span><br>
+    <span class="kw">print</span>(f<span class="st">"Dado 1: {dado1} | Dado 2: {dado2} | Suma: {suma}"</span>)
+  </div>
+
+  <div class="dados-row">
+    <div class="dado" id="d1">⚀</div>
+    <div class="dado" id="d2">⚀</div>
+  </div>
+
+  <div class="suma-box">
+    <div class="suma-label">Suma total</div>
+    <div class="suma-val" id="suma">—</div>
+  </div>
+  <br>
+  <button class="btn" onclick="lanzar()">🎲 Lanzar dados</button>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n" id="stat-lanzamientos">0</div><div class="stat-l">Lanzamientos</div></div>
+    <div class="stat"><div class="stat-n" id="stat-max">—</div><div class="stat-l">Suma máx.</div></div>
+    <div class="stat"><div class="stat-n" id="stat-min">—</div><div class="stat-l">Suma mín.</div></div>
+  </div>
+
+  <div class="historial">
+    <div class="hist-title">Historial</div>
+    <div id="historial-list"><div style="color:#475569;font-size:13px;padding:4px 0">Sin lanzamientos aún...</div></div>
+  </div>
+</div>
+
+<script>
+const caras=['⚀','⚁','⚂','⚃','⚄','⚅'];
+let historial=[],total=0,maxS=0,minS=99;
+
+function lanzar(){
+  const d1=document.getElementById('d1'),d2=document.getElementById('d2');
+  d1.classList.remove('rolling');d2.classList.remove('rolling');
+  void d1.offsetWidth;
+  d1.classList.add('rolling');d2.classList.add('rolling');
+  const r1=Math.floor(Math.random()*6)+1;
+  const r2=Math.floor(Math.random()*6)+1;
+  const suma=r1+r2;
+  setTimeout(()=>{
+    d1.textContent=caras[r1-1];
+    d2.textContent=caras[r2-1];
+    document.getElementById('suma').textContent=suma;
+    total++;
+    if(suma>maxS)maxS=suma;
+    if(suma<minS)minS=suma;
+    document.getElementById('stat-lanzamientos').textContent=total;
+    document.getElementById('stat-max').textContent=maxS;
+    document.getElementById('stat-min').textContent=minS;
+    historial.unshift({r1,r2,suma,n:total});
+    if(historial.length>15)historial.pop();
+    document.getElementById('historial-list').innerHTML=historial.map(h=>`
+      <div class="hist-item">#${h.n} → Dado 1: ${caras[h.r1-1]} ${h.r1}  +  Dado 2: ${caras[h.r2-1]} ${h.r2}  =  <span class="hist-suma">${h.suma}</span></div>`).join('');
+  },500);
+}
+</script>
+</body>
+</html>
