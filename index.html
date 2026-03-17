@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pallet Jack Safety Quiz</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f6fb;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem}
+  #app{width:100%;max-width:680px}
+  .screen{display:none}
+  .screen.active{display:block}
+  .badge{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;margin-bottom:10px}
+  .badge-quiz{background:#dbeafe;color:#1e40af}
+  .badge-scene{background:#fef3c7;color:#92400e}
+  .card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:1.5rem;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+  h1{font-size:28px;font-weight:700;color:#0f172a;margin-bottom:8px}
+  .sub{font-size:15px;color:#64748b;line-height:1.6;margin-bottom:1.5rem}
+  .timer-bar-wrap{height:7px;background:#e2e8f0;border-radius:4px;margin-bottom:1.25rem;overflow:hidden}
+  #timer-bar{height:7px;border-radius:4px;background:#378ADD;width:100%;transition:width 0.1s linear}
+  .question-text{font-size:17px;font-weight:600;color:#0f172a;margin-bottom:1.25rem;line-height:1.5}
+  .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+  @media(max-width:480px){.options-grid{grid-template-columns:1fr}}
+  .opt-btn{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:14px 12px;font-size:14px;color:#1e293b;cursor:pointer;text-align:left;line-height:1.4;transition:border-color 0.15s,background 0.15s;width:100%}
+  .opt-btn:hover:not(:disabled){background:#f1f5f9;border-color:#94a3b8}
+  .opt-btn.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;font-weight:600}
+  .opt-btn.wrong{background:#fee2e2;border-color:#dc2626;color:#7f1d1d}
+  .opt-btn.reveal{background:#dcfce7;border-color:#16a34a;color:#14532d;opacity:0.7}
+  .opt-btn:disabled{cursor:default}
+  .feedback{font-size:14px;color:#334155;line-height:1.6;min-height:40px;margin-bottom:1rem;padding:12px 14px;background:#f8fafc;border-left:3px solid #378ADD;border-radius:0 8px 8px 0;display:none}
+  .feedback.show{display:block}
+  .next-btn{width:100%;padding:12px;border:1.5px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;font-size:15px;cursor:pointer;font-weight:600;transition:background 0.15s}
+  .next-btn:hover{background:#f1f5f9}
+  .scene-desc{font-size:15px;color:#1e293b;line-height:1.7;margin-bottom:1.25rem;padding:14px;background:#f8fafc;border-radius:10px;border-left:3px solid #f59e0b}
+  .scene-choices{display:flex;flex-direction:column;gap:9px;margin-bottom:1rem}
+  .choice-btn{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:14px 16px;font-size:14px;color:#1e293b;cursor:pointer;text-align:left;line-height:1.5;transition:border-color 0.15s,background 0.15s;width:100%}
+  .choice-btn:hover:not(:disabled){background:#f1f5f9;border-color:#94a3b8}
+  .choice-btn.safe{background:#dcfce7;border-color:#16a34a;color:#14532d;font-weight:600}
+  .choice-btn.danger{background:#fee2e2;border-color:#dc2626;color:#7f1d1d}
+  .choice-btn:disabled{cursor:default}
+  .scene-result{display:none;font-size:14px;line-height:1.6;padding:12px 14px;border-radius:10px;margin-bottom:1rem;font-weight:500}
+  .scene-result.show{display:block}
+  .scene-result.ok{background:#dcfce7;color:#14532d;border-left:3px solid #16a34a}
+  .scene-result.bad{background:#fee2e2;color:#7f1d1d;border-left:3px solid #dc2626}
+  .progress-row{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem}
+  .progress-text{font-size:13px;color:#64748b;font-weight:500}
+  .score-pill{font-size:13px;font-weight:700;padding:5px 14px;border-radius:20px;background:#dbeafe;color:#1e40af}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:1.5rem 0}
+  .stat-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem;text-align:center}
+  .stat-num{font-size:30px;font-weight:700;color:#0f172a}
+  .stat-label{font-size:12px;color:#64748b;margin-top:4px;font-weight:500}
+  .restart-btn{width:100%;padding:13px;border:1.5px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;font-size:15px;cursor:pointer;font-weight:600;margin-top:10px;transition:background 0.15s}
+  .restart-btn:hover{background:#f1f5f9}
+  .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+  .hero-icon{font-size:48px;margin-bottom:14px;display:block}
+  .end-icon{font-size:48px;margin-bottom:14px;display:block}
+  .brand{font-size:12px;color:#94a3b8;text-align:center;margin-top:1.5rem;padding-bottom:1rem}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="start-screen" class="screen active">
+    <div class="card">
+      <span class="hero-icon">🚜</span>
+      <h1>Pallet Jack Safety</h1>
+      <p class="sub">Best practices &amp; guidelines — 8 rounds mixing quiz questions and real workplace scenarios. Test your knowledge and make the right calls.</p>
+      <div class="tag-row">
+        <span class="badge badge-quiz">5 quiz questions</span>
+        <span class="badge badge-scene">3 decision scenes</span>
+      </div>
+      <button class="next-btn" onclick="startGame()">Start training →</button>
+    </div>
+    <p class="brand">Pallet Jack Safety Training · Interactive Quiz</p>
+  </div>
+  <div id="quiz-screen" class="screen">
+    <div class="progress-row">
+      <span class="progress-text" id="q-progress"></span>
+      <span style="flex:1"></span>
+      <span class="score-pill" id="q-score">Score: 0</span>
+    </div>
+    <div class="timer-bar-wrap"><div id="timer-bar"></div></div>
+    <div class="card">
+      <span class="badge badge-quiz">Quiz</span>
+      <p class="question-text" id="question-text"></p>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-btn" id="next-btn" onclick="nextRound()" style="display:none">Continue →</button>
+    </div>
+  </div>
+  <div id="scene-screen" class="screen">
+    <div class="progress-row">
+      <span class="progress-text" id="s-progress"></span>
+      <span style="flex:1"></span>
+      <span class="score-pill" id="s-score">Score: 0</span>
+    </div>
+    <div class="card">
+      <span class="badge badge-scene">Scenario</span>
+      <p class="question-text" id="scene-title"></p>
+      <p class="scene-desc" id="scene-desc"></p>
+      <div class="scene-choices" id="scene-choices"></div>
+      <div class="scene-result" id="scene-result"></div>
+      <button class="next-btn" id="scene-next-btn" onclick="nextRound()" style="display:none">Continue →</button>
+    </div>
+  </div>
+  <div id="end-screen" class="screen">
+    <div class="card">
+      <span class="end-icon">🏁</span>
+      <h1 id="end-title"></h1>
+      <p class="sub" id="end-sub"></p>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" id="stat-score">0</div><div class="stat-label">Points</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-correct">0</div><div class="stat-label">Correct</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-pct">0%</div><div class="stat-label">Accuracy</div></div>
+      </div>
+      <button class="restart-btn" onclick="restartGame()">🔄 Play again</button>
+    </div>
+    <p class="brand">Pallet Jack Safety Training · Interactive Quiz</p>
+  </div>
+</div>
+<script>
+const quizzes=[
+  {q:"What is the maximum load capacity you should never exceed when operating a pallet jack?",opts:["The weight printed on the load label","The manufacturer's rated capacity","Whatever fits on the forks","Your supervisor's verbal estimate"],correct:1,fb:"Always follow the manufacturer's rated capacity — it's a safety limit, not a suggestion. Overloading causes tip-overs and equipment failure."},
+  {q:"When moving a loaded pallet jack on a slope, where should the load be positioned?",opts:["In front going downhill","Behind you going uphill","Load uphill, operator walks downhill","Position doesn't matter on slopes"],correct:2,fb:"Load uphill, operator downhill. This keeps gravity working in your favor and prevents the load from rolling over you."},
+  {q:"Before operating a pallet jack, what must you inspect?",opts:["Only the forks","Only the wheels","Forks, wheels, handle, brakes and hydraulic system","Just check if it moves forward"],correct:2,fb:"A full pre-operation inspection covers forks, wheels, handle, brakes, and hydraulics. Skipping this leads to accidents from hidden defects."},
+  {q:"How high should you raise the forks when traveling with a load?",opts:["As high as possible for visibility","4 to 6 inches off the floor","Half the height of the load","Always fully lowered"],correct:1,fb:"Keep forks 4–6 inches off the floor while traveling. Too high raises the center of gravity; fully lowered risks catching on floor irregularities."},
+  {q:"What should you do before entering a doorway or turning a corner with a pallet jack?",opts:["Speed up to clear the area quickly","Sound the horn or call out and slow down","Close your eyes and push through","Nothing — pedestrians should yield to equipment"],correct:1,fb:"Always signal your presence at blind spots. Pedestrian-equipment collisions are a leading cause of warehouse injuries."},
+];
+const scenes=[
+  {title:"The wet floor situation",desc:"You're about to move a pallet of boxes weighing 2,400 lbs. You notice the floor ahead has a wet patch — no wet floor sign is up. Your supervisor is across the warehouse. What do you do?",choices:[
+    {text:"Navigate carefully through the wet area — you've done it before",safe:false,fb:"Wrong call. Wet floors drastically reduce traction and increase tip-over risk, especially under heavy loads. Never assume 'careful' is enough."},
+    {text:"Stop, find a dry route or wait until the floor is dry and marked",safe:true,fb:"Correct. Wet surfaces are a major hazard with heavy loads. Reroute or wait — no delivery is worth a tip-over injury."},
+    {text:"Push through fast so the pallet spends less time on the wet area",safe:false,fb:"Speed makes it worse — less reaction time, more momentum, higher tip-over risk. Stop and reassess."}
+  ]},
+  {title:"The overloaded pallet",desc:"A coworker stacked two pallets on top of each other — combined weight is 5,200 lbs. The pallet jack is rated for 4,500 lbs. Your coworker says 'it's only a short distance, it'll be fine.' What do you do?",choices:[
+    {text:"Move it — short distances are low risk",safe:false,fb:"Distance doesn't reduce overload risk. Hydraulic failure or tip-over can happen instantly regardless of how far you travel."},
+    {text:"Refuse and split the load into two separate trips",safe:true,fb:"Correct. Rated capacity is a hard limit. Two trips is the only safe option — always split oversized loads."},
+    {text:"Move it slowly and stop if it feels unstable",safe:false,fb:"'Feels unstable' is already too late. The equipment can fail without warning when overloaded."}
+  ]},
+  {title:"The pedestrian zone",desc:"You need to move a load through a high-traffic pedestrian corridor. It's the fastest route. You can see people walking ahead. What is the correct approach?",choices:[
+    {text:"Proceed at normal speed — pedestrians will move out of the way",safe:false,fb:"Never assume pedestrians will react in time. Loaded pallet jacks can weigh over 6,000 lbs combined — a collision is catastrophic."},
+    {text:"Take an alternative route or wait for the corridor to clear, announce your presence loudly",safe:true,fb:"Correct. Pedestrian safety always comes first. Use alternative routes, sound warnings, and only enter shared spaces when clear."},
+    {text:"Speed through quickly to minimize exposure time in the pedestrian area",safe:false,fb:"Speeding in pedestrian areas is one of the most dangerous decisions you can make. Slow down, or find another route."}
+  ]},
+];
+const ORDER=[{type:'quiz',idx:0},{type:'quiz',idx:1},{type:'scene',idx:0},{type:'quiz',idx:2},{type:'quiz',idx:3},{type:'scene',idx:1},{type:'quiz',idx:4},{type:'scene',idx:2}];
+let round=0,score=0,correct=0,timer=null;
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function startGame(){round=0;score=0;correct=0;showRound();}
+function restartGame(){startGame();}
+function showRound(){if(round>=ORDER.length){showEnd();return;}const r=ORDER[round];if(r.type==='quiz')showQuiz(r.idx);else showScene(r.idx);}
+function showQuiz(idx){const q=quizzes[idx];document.getElementById('q-progress').textContent='Round '+(round+1)+' of '+ORDER.length;document.getElementById('q-score').textContent='Score: '+score;document.getElementById('question-text').textContent=q.q;const grid=document.getElementById('options-grid');grid.innerHTML='';q.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='opt-btn';b.textContent=o;b.onclick=()=>answerQuiz(idx,i);grid.appendChild(b);});document.getElementById('feedback').className='feedback';document.getElementById('feedback').textContent='';document.getElementById('next-btn').style.display='none';show('quiz-screen');startTimer();}
+function startTimer(){clearInterval(timer);let t=100;document.getElementById('timer-bar').style.width='100%';document.getElementById('timer-bar').style.background='#378ADD';timer=setInterval(()=>{t-=0.5;document.getElementById('timer-bar').style.width=t+'%';if(t<30)document.getElementById('timer-bar').style.background='#dc2626';if(t<=0){clearInterval(timer);timeUp();}},100);}
+function timeUp(){const idx=ORDER[round].idx;const q=quizzes[idx];document.querySelectorAll('.opt-btn').forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('reveal');});const fb=document.getElementById('feedback');fb.textContent='⏱ Time up! '+q.fb;fb.className='feedback show';document.getElementById('next-btn').style.display='block';}
+function answerQuiz(idx,chosen){clearInterval(timer);const q=quizzes[idx];document.querySelectorAll('.opt-btn').forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('correct');else if(i===chosen&&chosen!==q.correct)b.classList.add('wrong');});const timeLeft=parseFloat(document.getElementById('timer-bar').style.width)||0;if(chosen===q.correct){const pts=Math.round(500+timeLeft*5);score+=pts;correct++;document.getElementById('feedback').textContent='✓ Correct! +'+pts+' pts — '+q.fb;}else{document.getElementById('feedback').textContent='✗ Incorrect. '+q.fb;}document.getElementById('feedback').className='feedback show';document.getElementById('q-score').textContent='Score: '+score;document.getElementById('next-btn').style.display='block';}
+function showScene(idx){const s=scenes[idx];document.getElementById('s-progress').textContent='Round '+(round+1)+' of '+ORDER.length;document.getElementById('s-score').textContent='Score: '+score;document.getElementById('scene-title').textContent=s.title;document.getElementById('scene-desc').textContent=s.desc;const cc=document.getElementById('scene-choices');cc.innerHTML='';s.choices.forEach((c,i)=>{const b=document.createElement('button');b.className='choice-btn';b.textContent=c.text;b.onclick=()=>answerScene(idx,i);cc.appendChild(b);});document.getElementById('scene-result').className='scene-result';document.getElementById('scene-result').textContent='';document.getElementById('scene-next-btn').style.display='none';show('scene-screen');}
+function answerScene(idx,chosen){const s=scenes[idx];const c=s.choices[chosen];document.querySelectorAll('.choice-btn').forEach((b,i)=>{b.disabled=true;if(s.choices[i].safe)b.classList.add('safe');else b.classList.add('danger');});const res=document.getElementById('scene-result');if(c.safe){score+=600;correct++;res.className='scene-result show ok';res.textContent='✓ Safe choice! +600 pts — '+c.fb;}else{res.className='scene-result show bad';res.textContent='✗ Unsafe choice. '+c.fb;}document.getElementById('s-score').textContent='Score: '+score;document.getElementById('scene-next-btn').style.display='block';}
+function nextRound(){round++;showRound();}
+function showEnd(){const total=ORDER.length;const pct=Math.round((correct/total)*100);document.getElementById('stat-score').textContent=score;document.getElementById('stat-correct').textContent=correct+'/'+total;document.getElementById('stat-pct').textContent=pct+'%';let title,sub;if(pct>=80){title='Outstanding safety record!';sub='You clearly know your pallet jack protocols. This is the level every warehouse operator should reach.';}else if(pct>=50){title='Good effort — review the gaps';sub='Solid on the basics but a few key scenarios tripped you up. Review the feedback on missed questions before your next shift.';}else{title='Needs improvement';sub='Safety knowledge gaps in a warehouse environment are serious. Go through the guidelines and retake the training.';}document.getElementById('end-title').textContent=title;document.getElementById('end-sub').textContent=sub;show('end-screen');}
+</script>
+</body>
+</html>
