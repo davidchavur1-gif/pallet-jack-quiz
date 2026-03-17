@@ -6,145 +6,96 @@
 <title>Quiz — Fundamentos de Programación</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f0f4ff;
-  --white:#ffffff;
-  --green:#58cc02;
-  --green2:#46a302;
-  --blue:#1cb0f6;
-  --blue2:#0b8fc2;
-  --purple:#ce82ff;
-  --purple2:#9b59b6;
-  --red:#ff4b4b;
-  --orange:#ff9600;
-  --yellow:#ffc800;
-  --pink:#ff6b9d;
-  --teal:#00b8a9;
-  --text:#3c3c3c;
-  --muted:#afafaf;
-  --border:#e5e5e5;
-}
+:root{--bg:#f0f4ff;--white:#fff;--green:#58cc02;--green2:#46a302;--blue:#1cb0f6;--blue2:#0b8fc2;--purple:#ce82ff;--purple2:#9b59b6;--red:#ff4b4b;--orange:#ff9600;--yellow:#ffc800;--pink:#ff6b9d;--teal:#00b8a9;--text:#3c3c3c;--muted:#afafaf;--border:#e5e5e5}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-
 .cp{position:fixed;top:-14px;border-radius:3px;animation:cfall linear forwards;pointer-events:none;z-index:9999}
-@keyframes cfall{0%{transform:translateY(0) rotate(0) scale(1);opacity:1}100%{transform:translateY(110vh) rotate(800deg) scale(0.4);opacity:0}}
-
-nav{background:var(--white);border-bottom:2px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
-.nav-logo{font-size:18px;font-weight:900;color:var(--purple)}
+@keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+nav{background:var(--white);border-bottom:2px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.nav-logo{font-size:17px;font-weight:900;color:var(--purple)}
 .nav-logo span{color:var(--blue)}
-.nav-pills{display:flex;gap:8px;align-items:center}
-.pill{display:flex;align-items:center;gap:6px;background:var(--bg);border:2px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:800}
-.pill-xp{color:var(--orange)}
-.pill-streak{color:var(--red)}
-.pill-prog{color:var(--blue)}
-
-.screen{display:none;padding:24px;max-width:780px;margin:auto}
+.nav-pills{display:flex;gap:8px}
+.pill{display:flex;align-items:center;gap:5px;background:var(--bg);border:2px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:800}
+.screen{display:none;padding:24px;max-width:760px;margin:auto}
 .screen.active{display:block}
-
-/* HOME */
-.home-top{text-align:center;padding:32px 0 24px}
-.home-top h1{font-size:30px;font-weight:900;margin-bottom:6px}
-.home-top p{font-size:15px;color:var(--muted);margin-bottom:24px}
-.topics-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
-.topic-card{background:var(--white);border:2px solid var(--border);border-radius:18px;padding:22px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden}
-.topic-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;border-radius:0 0 16px 16px}
-.topic-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.1);border-color:transparent}
-.topic-icon{font-size:36px;margin-bottom:10px;display:block}
-.topic-title{font-size:15px;font-weight:900;color:var(--text);margin-bottom:4px}
-.topic-desc{font-size:12px;color:var(--muted)}
-.topic-count{font-size:11px;font-weight:800;margin-top:8px;padding:3px 10px;border-radius:10px;display:inline-block}
-
+.home-top{text-align:center;padding:28px 0 20px}
+.home-top h1{font-size:28px;font-weight:900;margin-bottom:6px}
+.home-top p{font-size:14px;color:var(--muted);margin-bottom:20px}
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
 .stat-card{background:var(--white);border:2px solid var(--border);border-radius:14px;padding:14px;text-align:center}
 .stat-n{font-size:26px;font-weight:900}
 .stat-l{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px}
-
-/* QUIZ */
-.quiz-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.back-btn{background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--text);transition:all 0.2s;flex-shrink:0}
+.topics-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.topic-card{background:var(--white);border:2px solid var(--border);border-radius:18px;padding:22px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden}
+.topic-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+.topic-icon{font-size:34px;margin-bottom:10px;display:block}
+.topic-title{font-size:15px;font-weight:900;margin-bottom:4px}
+.topic-desc{font-size:12px;color:var(--muted)}
+.topic-count{font-size:11px;font-weight:800;margin-top:8px;padding:3px 10px;border-radius:10px;display:inline-block}
+.quiz-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.back-btn{background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--text);flex-shrink:0}
 .back-btn:hover{background:var(--border)}
-.quiz-prog-wrap{flex:1}
+.prog-wrap{flex:1}
 .prog-bar-wrap{height:14px;background:var(--bg);border-radius:7px;overflow:hidden;border:2px solid var(--border)}
-.prog-bar{height:100%;border-radius:5px;transition:width 0.5s cubic-bezier(0.4,0,0.2,1)}
-.pb-purple{background:linear-gradient(90deg,var(--purple),#e8b4ff)}
-.pb-blue{background:linear-gradient(90deg,var(--blue),#7dd8ff)}
-.pb-green{background:linear-gradient(90deg,var(--green),#78e505)}
-.pb-orange{background:linear-gradient(90deg,var(--orange),var(--yellow))}
-.pb-teal{background:linear-gradient(90deg,var(--teal),#00e8d8)}
-.pb-pink{background:linear-gradient(90deg,var(--pink),#ff9bbf)}
-
+.prog-bar{height:100%;border-radius:5px;transition:width 0.5s ease}
+.score-box{display:flex;align-items:center;gap:5px;background:var(--bg);border:2px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0}
 .timer-wrap{height:12px;background:var(--bg);border-radius:6px;overflow:hidden;border:2px solid var(--border);margin-bottom:12px}
-#tbar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),#78e505);transition:width 0.1s linear}
+#tbar{height:100%;border-radius:4px;transition:width 0.1s linear;background:linear-gradient(90deg,var(--green),#78e505)}
 #tbar.warn{background:linear-gradient(90deg,var(--orange),var(--yellow))}
 #tbar.danger{background:linear-gradient(90deg,var(--red),#ff8080);animation:tpulse 0.4s infinite alternate}
 @keyframes tpulse{from{opacity:1}to{opacity:0.5}}
-
 #streak-disp{text-align:center;font-size:18px;font-weight:900;color:var(--orange);min-height:28px;margin-bottom:8px}
 #streak-disp.pop{animation:spop 0.4s ease}
 @keyframes spop{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
-
-.quiz-card{background:var(--white);border:2px solid var(--border);border-radius:20px;padding:26px;margin-bottom:16px;box-shadow:0 4px 0 var(--border)}
-.quiz-topic-tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding:4px 12px;border-radius:20px;display:inline-block}
-.quiz-q{font-size:17px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.4}
-.quiz-code{background:#1e1e2e;color:#cdd6f4;font-family:'Courier New',monospace;font-size:13px;border-radius:10px;padding:12px 14px;margin:10px 0;line-height:1.7;border-left:3px solid var(--purple)}
+.quiz-card{background:var(--white);border:2px solid var(--border);border-radius:18px;padding:24px;margin-bottom:14px;box-shadow:0 4px 0 var(--border)}
+.quiz-tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding:4px 12px;border-radius:20px;display:inline-block}
+.quiz-q{font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.4}
+.quiz-code{background:#1e1e2e;color:#cdd6f4;font-family:'Courier New',monospace;font-size:12px;border-radius:10px;padding:12px 14px;margin:10px 0;line-height:1.7;border-left:3px solid var(--purple);white-space:pre}
 .quiz-opts{display:flex;flex-direction:column;gap:10px}
-.quiz-opt{padding:13px 18px;border-radius:13px;font-size:14px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:var(--white);text-align:left;font-family:'Nunito',sans-serif;transition:all 0.15s;color:var(--text);line-height:1.4}
+.quiz-opt{padding:13px 18px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:var(--white);text-align:left;font-family:'Nunito',sans-serif;transition:all 0.15s;color:var(--text);line-height:1.4;width:100%}
 .quiz-opt:hover:not(:disabled){border-color:var(--blue);background:#f0f8ff;transform:translateX(4px)}
-.quiz-opt.correct{background:#d7ffb8;border-color:var(--green);color:var(--green2);animation:popopt 0.3s ease}
-.quiz-opt.wrong{background:#ffd5d5;border-color:var(--red);color:#cc3c3c;animation:shakeopt 0.3s ease}
+.quiz-opt.correct{background:#d7ffb8;border-color:var(--green);color:var(--green2)}
+.quiz-opt.wrong{background:#ffd5d5;border-color:var(--red);color:#cc3c3c}
 .quiz-opt.reveal{background:#d7ffb8;border-color:var(--green);color:var(--green2);opacity:0.6}
 .quiz-opt:disabled{cursor:default}
-@keyframes popopt{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
-@keyframes shakeopt{0%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}100%{transform:translateX(0)}}
-
-.quiz-fb{padding:14px 16px;border-radius:12px;font-size:14px;font-weight:700;margin-top:12px;display:none;line-height:1.5}
+.quiz-fb{padding:13px 16px;border-radius:12px;font-size:14px;font-weight:700;margin-top:12px;display:none;line-height:1.5}
 .quiz-fb.show{display:block}
 .qf-ok{background:#d7ffb8;color:var(--green2);border-left:4px solid var(--green)}
 .qf-bad{background:#ffd5d5;color:#cc3c3c;border-left:4px solid var(--red)}
-
-.next-btn{width:100%;padding:14px;border-radius:13px;font-size:15px;font-weight:800;border:none;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 0;transition:all 0.15s;margin-top:10px}
+.next-btn{width:100%;padding:13px;border-radius:12px;font-size:15px;font-weight:800;border:none;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;margin-top:10px;color:white}
 .next-btn:hover{transform:translateY(-2px)}
-.next-btn:active{transform:translateY(2px)}
-
-.score-box{display:flex;align-items:center;gap:6px;background:var(--bg);border:2px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0}
-
-#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;font-size:14px;font-weight:800;padding:12px 24px;border-radius:24px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:600;white-space:nowrap}
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;font-size:14px;font-weight:800;padding:11px 22px;border-radius:24px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:600;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:560px){.topics-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr 1fr}.screen{padding:16px}}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-logo">⚡ Fundamentos <span>Programación</span></div>
   <div class="nav-pills">
-    <div class="pill pill-xp">⭐ <span id="xp-nav">0</span> XP</div>
-    <div class="pill pill-streak">🔥 <span id="str-nav">0</span></div>
-    <div class="pill pill-prog">✅ <span id="done-nav">0</span></div>
+    <div class="pill" style="color:var(--orange)">⭐ <span id="xp-nav">0</span> XP</div>
+    <div class="pill" style="color:var(--red)">🔥 <span id="str-nav">0</span></div>
+    <div class="pill" style="color:var(--green)">✅ <span id="done-nav">0</span></div>
   </div>
 </nav>
 
-<!-- HOME -->
 <div class="screen active" id="screen-home">
   <div class="home-top">
     <h1>⚡ Fundamentos de Programación</h1>
     <p>Elige un tema y pon a prueba lo que sabes. Timer, rachas y sonidos incluidos.</p>
   </div>
-
   <div class="stats-row">
     <div class="stat-card"><div class="stat-n" style="color:var(--orange)" id="h-xp">0</div><div class="stat-l">⭐ XP Total</div></div>
     <div class="stat-card"><div class="stat-n" style="color:var(--red)" id="h-str">0</div><div class="stat-l">🔥 Racha máx.</div></div>
     <div class="stat-card"><div class="stat-n" style="color:var(--green)" id="h-acc">—</div><div class="stat-l">🎯 Precisión</div></div>
   </div>
-
   <div class="topics-grid" id="topics-grid"></div>
 </div>
 
-<!-- QUIZ -->
 <div class="screen" id="screen-quiz">
   <div class="quiz-header">
     <button class="back-btn" onclick="goHome()">← Volver</button>
-    <div class="quiz-prog-wrap">
+    <div class="prog-wrap">
       <div class="prog-bar-wrap"><div class="prog-bar" id="q-prog" style="width:0%"></div></div>
       <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:700;margin-top:3px">
         <span id="q-count">Pregunta 1</span>
@@ -157,408 +108,235 @@ nav{background:var(--white);border-bottom:2px solid var(--border);padding:0 24px
   <div class="timer-wrap"><div id="tbar"></div></div>
   <div id="quiz-area"></div>
 </div>
-
 <div id="toast"></div>
 
 <script>
-// ── AUDIO ──
-const AC=new(window.AudioContext||window.webkitAudioContext)();
+var AC=new(window.AudioContext||window.webkitAudioContext)();
 function rac(){if(AC.state==='suspended')AC.resume();}
-function b(f,d,t='sine',v=0.2){rac();const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,AC.currentTime);g.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+d);o.start();o.stop(AC.currentTime+d);}
-const S={
-  correct:()=>{b(523,0.08);setTimeout(()=>b(659,0.08),80);setTimeout(()=>b(784,0.15),160);setTimeout(()=>b(1047,0.18),240);},
-  wrong:()=>{b(280,0.1,'sawtooth',0.2);setTimeout(()=>b(200,0.2,'sawtooth',0.15),110);},
-  tick:()=>b(900,0.03,'square',0.06),
-  xp:()=>{b(660,0.06);setTimeout(()=>b(880,0.1),70);},
-  streak:()=>{b(880,0.06);setTimeout(()=>b(1100,0.08),70);},
-  win:()=>{[523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>b(f,0.12,'sine',0.2),i*80));},
-  nav:()=>b(500,0.05,'sine',0.08),
-};
-function playS(n){rac();S[n]&&S[n]();}
+function bip(f,d,t,v){rac();t=t||'sine';v=v||0.2;var o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,AC.currentTime);g.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+d);o.start();o.stop(AC.currentTime+d);}
+function sOk(){bip(523,0.08);setTimeout(function(){bip(659,0.08)},80);setTimeout(function(){bip(784,0.12)},160);setTimeout(function(){bip(1047,0.16)},240);}
+function sFail(){bip(280,0.1,'sawtooth',0.2);setTimeout(function(){bip(200,0.2,'sawtooth',0.15)},110);}
+function sTick(){bip(900,0.03,'square',0.06);}
+function sWin(){var ff=[523,659,784,1047,1319];for(var i=0;i<ff.length;i++){(function(f,i){setTimeout(function(){bip(f,0.12,'sine',0.2)},i*80)})(ff[i],i);}}
+function sStr(){bip(880,0.06);setTimeout(function(){bip(1100,0.08)},70);}
 
-function confetti(n=50){
-  const c=['#58cc02','#1cb0f6','#ff9600','#ce82ff','#ff4b4b','#ffc800'];
-  for(let i=0;i<n;i++){const el=document.createElement('div');el.className='cp';const sz=8+Math.random()*8;el.style.cssText=`left:${Math.random()*100}vw;background:${c[~~(Math.random()*c.length)]};width:${sz}px;height:${sz}px;animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*0.4}s;border-radius:${Math.random()>0.5?'50%':'3px'}`;document.body.appendChild(el);setTimeout(()=>el.remove(),4000);}
+function confetti(n){
+  n=n||40;var c=['#58cc02','#1cb0f6','#ff9600','#ce82ff','#ff4b4b','#ffc800'];
+  for(var i=0;i<n;i++){var el=document.createElement('div');el.className='cp';var sz=8+Math.random()*8;el.style.cssText='left:'+Math.random()*100+'vw;background:'+c[Math.floor(Math.random()*c.length)]+';width:'+sz+'px;height:'+sz+'px;animation-duration:'+(1.5+Math.random()*2)+'s;animation-delay:'+Math.random()*0.4+'s;border-radius:'+(Math.random()>0.5?'50%':'3px');document.body.appendChild(el);setTimeout(function(e){e.remove()},4000,el);}
 }
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2200);}
 
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+var ST={xp:0,streak:0,totalA:0,totalC:0};
+try{var ss=localStorage.getItem('fprog3');if(ss)ST=Object.assign(ST,JSON.parse(ss));}catch(e){}
+function saveS(){try{localStorage.setItem('fprog3',JSON.stringify(ST));}catch(e){}}
+function updUI(){document.getElementById('xp-nav').textContent=ST.xp;document.getElementById('str-nav').textContent=ST.streak;document.getElementById('done-nav').textContent=ST.totalC;document.getElementById('h-xp').textContent=ST.xp;document.getElementById('h-str').textContent=ST.streak;document.getElementById('h-acc').textContent=ST.totalA?Math.round(ST.totalC/ST.totalA*100)+'%':'—';}
 
-// ── STATE ──
-let state={xp:0,streak:0,totalA:0,totalC:0};
-try{const s=localStorage.getItem('fprog');if(s)state=Object.assign(state,JSON.parse(s));}catch(e){}
-function saveState(){try{localStorage.setItem('fprog',JSON.stringify(state));}catch(e){}}
-function updateUI(){
-  document.getElementById('xp-nav').textContent=state.xp;
-  document.getElementById('str-nav').textContent=state.streak;
-  document.getElementById('done-nav').textContent=state.totalC;
-  document.getElementById('h-xp').textContent=state.xp;
-  document.getElementById('h-str').textContent=state.streak;
-  document.getElementById('h-acc').textContent=state.totalA?Math.round(state.totalC/state.totalA*100)+'%':'—';
-}
-
-// ── QUESTIONS ──
-const TOPICS=[
-  {
-    id:'compiladores',
-    title:'Compiladores e Intérpretes',
-    icon:'⚙️',
-    color:'#1cb0f6',
-    color2:'#0b8fc2',
-    pbClass:'pb-blue',
-    desc:'Diferencias entre compilador e intérprete, lenguajes y ejecución',
-    questions:[
-      {q:'¿Cuál de los siguientes lenguajes utiliza un intérprete para su ejecución?',opts:['Java','Python','C++'],correct:1,fb:'Python usa un intérprete — ejecuta el código línea por línea. Java usa bytecode+JVM y C++ se compila a código máquina directamente.'},
-      {q:'¿Qué ventaja tiene un compilador sobre un intérprete?',opts:['Permite ejecutar el programa línea por línea.','La velocidad de ejecución suele ser mayor, ya que el código se compila una sola vez antes de ejecutarse.','Reduce el tamaño del código fuente.'],correct:1,fb:'El compilador traduce TODO el código antes de ejecutarlo. El resultado es más rápido porque no hay traducción en tiempo real.'},
-      {q:'¿Cuál es la principal diferencia entre un intérprete y un compilador?',opts:['Un intérprete traduce el código línea por línea durante la ejecución, mientras que un compilador traduce todo el código antes de ejecutarlo.','El intérprete convierte el código a lenguaje máquina, mientras que el compilador genera bytecode.','Un compilador solo funciona con lenguajes de bajo nivel, y un intérprete con lenguajes de alto nivel.'],correct:0,fb:'Clave: intérprete = traduce mientras ejecuta (línea a línea). Compilador = traduce todo primero, luego ejecuta.'},
-      {q:'¿Qué es la programación por bloques?',opts:['Un enfoque de programación visual donde los usuarios arrastran y conectan bloques que representan instrucciones.','Un método de programación que utiliza piezas de código ya compilado.','Un lenguaje de programación basado en estructuras condicionales.'],correct:0,fb:'Scratch es el ejemplo más conocido. Los bloques visuales representan instrucciones — ideal para aprender sin sintaxis.'},
-      {q:'¿Cuál fue uno de los primeros lenguajes de programación de alto nivel creado en los años 1950?',opts:['Java','Fortran','Python'],correct:1,fb:'Fortran (1957) fue diseñado para cálculos científicos. Java es de 1995 y Python de 1991.'},
-      {q:'¿Cuál es la principal función de un algoritmo en la programación?',opts:['Generar directamente el ejecutable del programa.','Resolver un problema dividiendo el código en módulos.','Definir un conjunto de pasos ordenados para solucionar un problema.'],correct:2,fb:'Un algoritmo es una secuencia de pasos ordenados y finitos para resolver un problema. No genera ejecutables ni divide módulos.'},
-    ]
-  },
-  {
-    id:'software',
-    title:'Ciclo de Vida del Software',
-    icon:'🔄',
-    color:'#58cc02',
-    color2:'#46a302',
-    pbClass:'pb-green',
-    desc:'Fases del desarrollo, control de versiones, tipos de errores',
-    questions:[
-      {q:'¿Cuál de los siguientes programas es más adecuado para gestionar el control de versiones de un proyecto de software?',opts:['GIT','Visual Studio Code','Microsoft Excel'],correct:0,fb:'GIT es el sistema de control de versiones más usado del mundo. VS Code es un editor y Excel es una hoja de cálculo.'},
-      {q:'¿En qué fase del ciclo de vida del software se realiza la detección de errores y pruebas funcionales?',opts:['Análisis de requisitos','Mantenimiento','Pruebas'],correct:2,fb:'La fase de Pruebas (Testing) es donde se detectan errores y se verifica que el software cumple los requisitos.'},
-      {q:'¿Cuál de los siguientes es un ejemplo de error lógico en un programa?',opts:['La división entre cero genera una excepción en tiempo de ejecución.','El programa calcula mal una suma pero no genera error durante la ejecución.','La aplicación no compila debido a un error de sintaxis.'],correct:1,fb:'Error lógico = el programa funciona pero da resultados incorrectos. No da ningún error visible — es el más difícil de detectar.'},
-      {q:'¿Cuál es la principal diferencia entre los lenguajes declarativos e imperativos?',opts:['Los lenguajes imperativos requieren describir paso a paso las instrucciones, mientras que los declarativos solo especifican el resultado deseado.','Los lenguajes declarativos se enfocan en el "cómo", mientras que los imperativos en el "qué".','Los lenguajes imperativos son siempre más lentos que los declarativos.'],correct:0,fb:'Imperativo = describes CÓMO hacerlo (paso a paso). Declarativo = describes QUÉ quieres (SQL es un ejemplo declarativo).'},
-    ]
-  },
-  {
-    id:'operadores',
-    title:'Operadores y Arrays',
-    icon:'🔢',
-    color:'#ce82ff',
-    color2:'#9b59b6',
-    pbClass:'pb-purple',
-    desc:'Operadores lógicos, aritméticos y estructuras de datos básicas',
-    questions:[
-      {q:'¿Qué valor produce la expresión (5 > 3) && (2 < 4)?',opts:['false','true','null'],correct:1,fb:'(5>3) = true y (2<4) = true. Con && (AND), ambas condiciones deben ser true para que el resultado sea true. ✅'},
-      {q:'Si a = 5 y b = 2, ¿cuál es el resultado de a % b?',opts:['1','0','3'],correct:0,fb:'% es el operador módulo (resto). 5 ÷ 2 = 2 con resto 1. El módulo devuelve el RESTO de la división.'},
-      {q:'Si tienes un array numeros = [3, 5, 7, 9, 11], ¿qué valor devuelve numeros[2]?',opts:['7','3','5'],correct:0,fb:'Los arrays empiezan en índice 0. numeros[0]=3, numeros[1]=5, numeros[2]=7. ¡Siempre cuenta desde 0!',code:'numeros = [3, 5, 7, 9, 11]\nprint(numeros[2])  # → 7'},
-      {q:'¿Qué es un array en programación?',opts:['Una variable que almacena solo un valor a la vez','Una estructura de datos que almacena múltiples valores del mismo tipo en una sola variable','Una estructura de control para repetir código'],correct:1,fb:'Un array es una colección ordenada de elementos. En Python se llaman listas: nombres = ["Ana", "Luis", "Eva"]'},
-      {q:'¿Qué es una función en programación?',opts:['Una estructura que repite código de forma indefinida','Un bucle que solo se ejecuta una vez','Un bloque de código que realiza una tarea específica y que puede reutilizarse en el programa'],correct:2,fb:'Las funciones permiten REUTILIZAR código. Se definen una vez y se llaman múltiples veces. DRY = Don\'t Repeat Yourself.'},
-      {q:'¿Qué función cumple la estructura if-else en programación?',opts:['Repite un bloque de código hasta que se cumpla una condición','Ejecuta un bloque de código un número determinado de veces','Evalúa una condición y permite ejecutar diferentes bloques de código dependiendo de si la condición es verdadera o falsa'],correct:2,fb:'if-else = estructura condicional. Si la condición es true → ejecuta el bloque if. Si es false → ejecuta el bloque else.'},
-      {q:'¿Cuál es la diferencia entre un tipo de dato entero y un tipo de dato flotante?',opts:['Un tipo flotante almacena caracteres, y un entero solo almacena números','Un tipo entero almacena números sin decimales, mientras que un flotante incluye decimales','Ambos pueden almacenar números con decimales'],correct:1,fb:'int = enteros sin decimales (1, 2, -5). float = números con decimales (3.14, -0.5). En Python: x=5 es int, x=5.0 es float.'},
-      {q:'¿Cuál es la principal diferencia entre una estructura cíclica for y un bucle while?',opts:['for se usa cuando se conoce el número de iteraciones y while se usa para condiciones','No hay diferencia, ambos repiten código.','for se usa para condiciones indefinidas y while para condiciones definidas'],correct:0,fb:'for = número de iteraciones conocido (recorrer una lista). while = se repite mientras una condición sea true (no sabes cuántas veces).'},
-    ]
-  },
-  {
-    id:'python',
-    title:'Python — Variables y Listas',
-    icon:'🐍',
-    color:'#ff9600',
-    color2:'#cc7a00',
-    pbClass:'pb-orange',
-    desc:'Variables, tipos de datos, listas y operaciones en Python',
-    questions:[
-      {q:'¿Qué es una variable en Python?',opts:['Una constante cuyo valor no puede cambiar','Un contenedor para almacenar datos que puede cambiar durante la ejecución','Una función que devuelve un valor'],correct:1,fb:'Una variable es un espacio en memoria con nombre para almacenar datos. Su valor puede cambiar: x=5 luego x=10.'},
-      {q:'¿Cuál de las siguientes es una regla para nombrar variables en Python?',opts:['Deben comenzar con una letra o un guion bajo','Pueden contener espacios en su nombre','Pueden comenzar con un número'],correct:0,fb:'Reglas Python: empezar con letra o _ (no número), sin espacios, sin caracteres especiales. Válido: mi_var, _dato. Inválido: 2var, mi var.'},
-      {q:'¿Qué tipo de dato será x después de esta asignación? x = 3.14',opts:['str','int','float'],correct:2,fb:'3.14 tiene decimales → es float. Si fuera x=3 sería int. Si fuera x="3.14" sería str. Python asigna el tipo automáticamente.',code:'x = 3.14\nprint(type(x))  # → <class \'float\'>'},
-      {q:'¿Qué hace este código con la lista mi_lista?\nmi_lista = [1, 2, 3]\nmi_lista.append(4)',opts:['Inserta el número 4 al principio de la lista','Añade el número 4 al final de la lista.','Sustituye el último elemento por 4'],correct:1,fb:'append() siempre añade al FINAL. Para añadir al principio se usa insert(0, valor). Resultado: [1, 2, 3, 4]',code:'mi_lista = [1, 2, 3]\nmi_lista.append(4)\nprint(mi_lista)  # → [1, 2, 3, 4]'},
-      {q:'¿Cómo accedes al segundo elemento de una lista llamada nombres?',opts:['nombres[2]','nombres[1]','nombres[-1]'],correct:1,fb:'Índice 0 = primer elemento. Índice 1 = segundo elemento. nombres[-1] = último elemento. ¡Los índices empiezan en 0!',code:'nombres = ["Ana", "Luis", "Eva"]\nprint(nombres[1])  # → Luis'},
-      {q:'¿Cuál es la salida del siguiente código?\nmi_lista = [1, 2, 3, 4, 5]\nprint(mi_lista[1:4])',opts:['[1, 2, 3]','[1, 2, 3, 4]','[2, 3, 4]'],correct:2,fb:'Slicing [1:4] = desde índice 1 HASTA 4 (sin incluir el 4). Índice 1=2, 2=3, 3=4. Resultado: [2, 3, 4]',code:'mi_lista = [1, 2, 3, 4, 5]\nprint(mi_lista[1:4])  # → [2, 3, 4]'},
-      {q:'¿Qué devuelve el siguiente código?\nmi_lista = [5, 10, 15]\nlen(mi_lista)',opts:['3','15','2'],correct:0,fb:'len() devuelve el número de elementos de la lista. [5, 10, 15] tiene 3 elementos → len() = 3.',code:'mi_lista = [5, 10, 15]\nprint(len(mi_lista))  # → 3'},
-    ]
-  },
-
-  ,{
-    id:'estructuras',
-    title:'Estructuras de Datos',
-    icon:'📦',
-    color:'#00b8a9',
-    color2:'#008a80',
-    pbClass:'pb-teal',
-    desc:'Listas, tuplas, sets, diccionarios y cadenas en Python',
-    questions:[
-      {q:'¿Es posible usar una lista como clave en un diccionario?',opts:['No, porque las claves deben ser inmutables y las listas son mutables.','Sí, siempre que no cambies la lista después de usarla como clave.','No, porque los diccionarios solo aceptan enteros como claves.'],correct:0,fb:'Las claves de un diccionario deben ser INMUTABLES (int, str, tuple). Las listas son mutables → no pueden ser claves. Da TypeError.'},
-      {q:'¿Son las cadenas de texto en Python inmutables?',opts:['Sí, porque cualquier modificación genera una nueva cadena sin alterar la original.','Sí, pero solo si la cadena tiene menos de 256 caracteres.','No, porque puedes usar métodos como replace para modificarlas directamente.'],correct:0,fb:'Las strings son INMUTABLES. s.replace() devuelve una NUEVA cadena, no modifica la original. s = "hola"; s[0] = "H" → TypeError.',code:'s = "hola"
-s2 = s.replace("h","H")  # nueva cadena
-print(s)   # → hola (sin cambios)
-print(s2)  # → Hola'},
-      {q:'¿Cómo se diferencia una tupla de una lista?',opts:['Es una lista que solo puede contener números','Es una estructura de datos que puede modificarse con el tiempo','Es similar pero es inmutable'],correct:2,fb:'Tupla = inmutable (no se puede modificar). Lista = mutable. Tupla: (1,2,3) con paréntesis. Lista: [1,2,3] con corchetes.',code:'lista = [1, 2, 3]   # mutable
-tupla = (1, 2, 3)   # inmutable
-lista[0] = 99       # ✅ OK
-tupla[0] = 99       # ❌ TypeError'},
-      {q:'¿Qué método se usa para convertir una cadena en una lista de palabras separadas por un delimitador específico?',opts:['partition()','split()','join()'],correct:1,fb:'split() divide una cadena en una lista según un delimitador. join() hace lo contrario (une lista en cadena). partition() divide en 3 partes.',code:'"hola mundo".split()     # → ["hola", "mundo"]
-"a,b,c".split(",")        # → ["a", "b", "c"]
-",".join(["a","b","c"])   # → "a,b,c"'},
-      {q:'¿Qué métodos puedes usar para iterar sobre las claves, valores y elementos de un diccionario?',opts:['get(), set(), update()','keys(), values(), items()','append(), extend(), pop()'],correct:1,fb:'keys() → claves, values() → valores, items() → pares (clave,valor). append/extend son de listas. get() accede a un valor por clave.',code:'d = {"a":1, "b":2}
-d.keys()    # → dict_keys(["a","b"])
-d.values()  # → dict_values([1, 2])
-d.items()   # → dict_items([("a",1),("b",2)])'},
-      {q:'¿Cuál es la principal ventaja de usar un set en lugar de una lista en Python?',opts:['Los sets permiten almacenar valores duplicados.','Los sets son más fáciles de ordenar.','Los sets tienen una búsqueda más rápida gracias a su implementación basada en hash.'],correct:2,fb:'Set usa hash → búsqueda O(1) vs lista O(n). Además los sets NO permiten duplicados. No tienen orden definido.',code:'mi_set = {1, 2, 3, 2, 1}  # elimina duplicados
-print(mi_set)  # → {1, 2, 3}'},
-      {q:'¿Cómo puedes simular una constante en Python, dado que no existe un tipo nativo para constantes?',opts:['Usando variables con nombres en MAYÚSCULAS como convención.','Usando la palabra clave const en Python.','Usando variables globales con nombres en minúscula.'],correct:0,fb:'Python no tiene const. Por convención, se usan MAYÚSCULAS para indicar que es constante: PI = 3.14159. No impide cambiarla pero avisa al programador.',code:'PI = 3.14159       # constante por convención
-MAX_SIZE = 100     # constante por convención'},
-      {q:'¿Es correcto modificar la lista dentro de la tupla my_tuple = (1, 2, [3, 4])? ¿Por qué?',opts:['Sí, porque aunque la tupla es inmutable, los objetos mutables dentro de ella sí pueden modificarse.','No, porque las tuplas son inmutables y no permiten ninguna modificación.','No, porque los elementos dentro de una tupla también son inmutables.'],correct:0,fb:'La tupla es inmutable (no puedes cambiar qué objetos contiene), pero si contiene un objeto mutable como una lista, ESA lista sí puede modificarse.',code:'my_tuple = (1, 2, [3, 4])
-my_tuple[2].append(5)  # ✅ OK
-print(my_tuple)  # → (1, 2, [3, 4, 5])
-my_tuple[0] = 9  # ❌ TypeError'},
-    ]
-  },
-  {
-    id:'funciones',
-    title:'Funciones en Python',
-    icon:'🔧',
-    color:'#ff6b9d',
-    color2:'#cc4477',
-    pbClass:'pb-pink',
-    desc:'Definición, parámetros, return, args y kwargs',
-    questions:[
-      {q:'¿Cómo se define una función en Python?',opts:['def mi_función():','define mi_función():','func mi_función():','function mi_función():'],correct:0,fb:'La palabra clave es def seguida del nombre y paréntesis. Es una de las palabras reservadas más importantes de Python.',code:'def mi_funcion():
-    print("Hola!")'},
-      {q:'¿Qué palabra clave se utiliza para devolver un valor desde una función?',opts:['return','send','yield','output'],correct:0,fb:'return devuelve el valor y termina la función. yield es para generadores (devuelve pero no termina). send y output no existen en Python.',code:'def suma(a, b):
-    return a + b  # devuelve el resultado
-
-resultado = suma(3, 4)  # → 7'},
-      {q:'¿Qué se imprime al ejecutar este código?
-
-def suma(a, b):
-    return a + b
-print(suma(2, 3))',opts:['Error','6','23','5'],correct:3,fb:'suma(2,3) = 2+3 = 5. No es 6 (eso sería 2+4). No es 23 (eso sería concatenación de strings). La función devuelve la suma aritmética.',code:'def suma(a, b):
-    return a + b
-print(suma(2, 3))  # → 5'},
-      {q:'¿Qué sucede si una función no tiene una declaración return?',opts:['Devuelve 0','Devuelve una cadena vacía','Da error','Devuelve None'],correct:3,fb:'En Python, si no hay return (o hay return sin valor), la función devuelve None automáticamente. None representa "ningún valor".',code:'def sin_return():
-    x = 5
-
-result = sin_return()
-print(result)  # → None'},
-      {q:'¿Cómo se llama a una función en Python?',opts:['call(funcion)','funcion()','call funcion()','funcion.call()'],correct:1,fb:'Para llamar una función se escribe su nombre seguido de paréntesis. Dentro de los paréntesis van los argumentos si los necesita.',code:'def saludar():
-    print("Hola!")
-
-saludar()  # ✅ así se llama'},
-      {q:'¿Cuál es la salida de este código?
-def saludar(nombre="Mundo"):
-    print(f"Hola, {nombre}")
-saludar()',opts:['Hola, nombre','Hola, Mundo','Hola','Error'],correct:1,fb:'"Mundo" es el valor por defecto del parámetro. Si llamas saludar() sin argumentos, usa el valor por defecto. saludar("David") imprimiría "Hola, David".',code:'def saludar(nombre="Mundo"):
-    print(f"Hola, {nombre}")
-
-saludar()          # → Hola, Mundo
-saludar("David")   # → Hola, David'},
-      {q:'¿Qué tipo de parámetro permite que una función acepte un número variable de argumentos?',opts:['**kwargs','varargs','listargs','*args'],correct:3,fb:'*args acepta N argumentos posicionales → se reciben como tupla. **kwargs acepta N argumentos con nombre → se reciben como diccionario.',code:'def suma(*args):
-    return sum(args)
-
-suma(1,2,3)      # → 6
-suma(1,2,3,4,5)  # → 15'},
-    ]
-  },
-  {
-    id:'modulos',
-    title:'Módulos y Librerías',
-    icon:'📚',
-    color:'#1cb0f6',
-    color2:'#0b8fc2',
-    pbClass:'pb-blue',
-    desc:'Import, módulos, librerías externas y pip',
-    questions:[
-      {q:'¿Cómo se importa un módulo en Python?',opts:['include modulo','using modulo','import modulo','load modulo'],correct:2,fb:'La palabra clave es import. En otros lenguajes es include (C/C++), using (C#) o require (JavaScript). Python usa import.',code:'import math
-import random
-import os'},
-      {q:'¿Qué extensión tienen normalmente los módulos de Python?',opts:['.lib','.py','.txt','.mod'],correct:1,fb:'Los archivos Python tienen extensión .py. Un módulo es simplemente un archivo .py con funciones, clases o variables que puedes importar.',code:'# mi_modulo.py
-def saludar():
-    print("Hola desde el módulo!")'},
-      {q:'¿Qué hace la instrucción: from math import sqrt',opts:['Crea un nuevo módulo llamado sqrt','Importa solo la función sqrt del módulo math','Borra el módulo math','Importa todo el módulo math'],correct:1,fb:'from X import Y → importa SOLO Y del módulo X. Ventaja: no necesitas escribir math.sqrt(), solo sqrt(). import math importaría todo.',code:'from math import sqrt
-print(sqrt(16))  # → 4.0
-
-# vs
-import math
-print(math.sqrt(16))  # → 4.0'},
-      {q:'¿Cómo se puede acceder a una función de un módulo después de importarlo?',opts:['módulo/función()','módulo -> función()','módulo.función()','módulo::función()'],correct:2,fb:'La notación de punto (.) es la forma estándar en Python. módulo::función() es de C++. módulo->función() es de C con punteros.',code:'import math
-print(math.sqrt(25))  # → 5.0
-print(math.pi)        # → 3.14159...'},
-      {q:'¿Qué palabra clave se usa para renombrar un módulo al importarlo?',opts:['rename','alias','using','as'],correct:3,fb:'as permite crear un alias. Muy común con numpy (import numpy as np) o pandas (import pandas as pd) para escribir menos.',code:'import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-np.array([1,2,3])  # en vez de numpy.array(...)'},
-      {q:'¿Qué es una librería en Python?',opts:['Un conjunto de funciones sin organización','Un único módulo','Una colección de módulos relacionados','Un solo archivo de texto'],correct:2,fb:'Librería = colección de módulos relacionados. Por ejemplo, NumPy es una librería con muchos módulos para cálculo numérico. Un módulo = un archivo .py.',code:'# numpy es una librería con módulos como:
-# numpy.linalg (álgebra lineal)
-# numpy.random (números aleatorios)
-# numpy.fft (transformada de Fourier)'},
-      {q:'¿Qué comando instalaría una librería externa en tu entorno de Python?',opts:['import nombre_librería','pip download nombre_libreria','pip install nombre_libreria','install nombre_libreria'],correct:2,fb:'pip install es el comando estándar para instalar librerías de PyPI (Python Package Index). pip download solo la descarga sin instalar.',code:'pip install numpy
-pip install pandas
-pip install requests
-
-# Luego en tu código:
-import numpy as np'},
-    ]
-  }
-
+var TOPICS=[
+{id:'comp',title:'Compiladores e Intérpretes',icon:'⚙️',color:'#1cb0f6',color2:'#0b8fc2',questions:[
+{q:'¿Cuál de los siguientes lenguajes utiliza un intérprete para su ejecución?',opts:['Java','Python','C++'],correct:1,fb:'Python usa intérprete — ejecuta línea por línea. Java usa bytecode+JVM. C++ compila a código máquina.'},
+{q:'¿Qué ventaja tiene un compilador sobre un intérprete?',opts:['Permite ejecutar el programa línea por línea.','La velocidad de ejecución suele ser mayor, ya que el código se compila una sola vez.','Reduce el tamaño del código fuente.'],correct:1,fb:'El compilador traduce TODO el código antes de ejecutarlo → más rápido porque no hay traducción en tiempo real.'},
+{q:'¿Cuál es la principal diferencia entre un intérprete y un compilador?',opts:['Un intérprete traduce línea por línea durante la ejecución, mientras que un compilador traduce todo el código antes de ejecutarlo.','El intérprete convierte el código a lenguaje máquina, mientras que el compilador genera bytecode.','Un compilador solo funciona con lenguajes de bajo nivel.'],correct:0,fb:'Intérprete = traduce mientras ejecuta (línea a línea). Compilador = traduce todo primero, luego ejecuta.'},
+{q:'¿Qué es la programación por bloques?',opts:['Un enfoque visual donde los usuarios arrastran y conectan bloques que representan instrucciones.','Un método que utiliza piezas de código ya compilado.','Un lenguaje basado en estructuras condicionales.'],correct:0,fb:'Scratch es el ejemplo más conocido. Bloques visuales = instrucciones. Ideal para aprender sin sintaxis.'},
+{q:'¿Cuál fue uno de los primeros lenguajes de alto nivel creado en los años 1950?',opts:['Java','Fortran','Python'],correct:1,fb:'Fortran (1957) diseñado para cálculos científicos. Java es de 1995 y Python de 1991.'},
+{q:'¿Cuál es la principal función de un algoritmo?',opts:['Generar directamente el ejecutable del programa.','Resolver un problema dividiendo el código en módulos.','Definir un conjunto de pasos ordenados para solucionar un problema.'],correct:2,fb:'Un algoritmo es una secuencia de pasos ordenados y finitos para resolver un problema.'}
+]},
+{id:'soft',title:'Ciclo de Vida del Software',icon:'🔄',color:'#58cc02',color2:'#46a302',questions:[
+{q:'¿Cuál programa es más adecuado para gestionar el control de versiones?',opts:['GIT','Visual Studio Code','Microsoft Excel'],correct:0,fb:'GIT es el sistema de control de versiones más usado del mundo. VS Code es editor. Excel es hoja de cálculo.'},
+{q:'¿En qué fase del ciclo de vida se realiza la detección de errores y pruebas funcionales?',opts:['Análisis de requisitos','Mantenimiento','Pruebas'],correct:2,fb:'La fase de Pruebas (Testing) es donde se detectan errores y se verifica que el software cumple los requisitos.'},
+{q:'¿Cuál de los siguientes es un ejemplo de error lógico?',opts:['La división entre cero genera una excepción.','El programa calcula mal una suma pero no genera error.','La aplicación no compila debido a un error de sintaxis.'],correct:1,fb:'Error lógico = el programa funciona pero da resultados incorrectos. No da ningún error visible — el más difícil de detectar.'},
+{q:'¿Cuál es la principal diferencia entre lenguajes declarativos e imperativos?',opts:['Los imperativos describen paso a paso las instrucciones, mientras que los declarativos solo especifican el resultado deseado.','Los declarativos se enfocan en el como, mientras que los imperativos en el qué.','Los imperativos son siempre más lentos que los declarativos.'],correct:0,fb:'Imperativo = describes CÓMO hacerlo (paso a paso). Declarativo = describes QUÉ quieres (SQL es declarativo).'}
+]},
+{id:'oper',title:'Operadores y Arrays',icon:'🔢',color:'#ce82ff',color2:'#9b59b6',questions:[
+{q:'¿Qué valor produce la expresión (5 > 3) && (2 < 4)?',opts:['false','true','null'],correct:1,fb:'(5>3) = true y (2<4) = true. Con && (AND) ambas deben ser true → resultado true.'},
+{q:'Si a = 5 y b = 2, ¿cuál es el resultado de a % b?',opts:['1','0','3'],correct:0,fb:'% es el módulo (resto). 5 ÷ 2 = 2 con resto 1. El módulo devuelve el RESTO de la división.'},
+{q:'Si numeros = [3, 5, 7, 9, 11], ¿qué devuelve numeros[2]?',opts:['7','3','5'],correct:0,fb:'Los arrays empiezan en índice 0. numeros[0]=3, numeros[1]=5, numeros[2]=7.',code:'numeros = [3, 5, 7, 9, 11]\nprint(numeros[2])  # → 7'},
+{q:'¿Qué es un array en programación?',opts:['Una variable que almacena solo un valor a la vez','Una estructura de datos que almacena múltiples valores del mismo tipo en una sola variable','Una estructura de control para repetir código'],correct:1,fb:'Un array es una colección ordenada de elementos. En Python se llaman listas.'},
+{q:'¿Qué es una función en programación?',opts:['Una estructura que repite código de forma indefinida','Un bucle que solo se ejecuta una vez','Un bloque de código que realiza una tarea específica y puede reutilizarse'],correct:2,fb:'Las funciones permiten REUTILIZAR código. Se definen una vez y se llaman múltiples veces.'},
+{q:'¿Qué función cumple la estructura if-else?',opts:['Repite un bloque de código hasta que se cumpla una condición','Ejecuta un bloque de código un número determinado de veces','Evalúa una condición y permite ejecutar diferentes bloques según si es verdadera o falsa'],correct:2,fb:'if-else = estructura condicional. true → bloque if. false → bloque else.'},
+{q:'¿Cuál es la diferencia entre un tipo entero y un tipo flotante?',opts:['Un flotante almacena caracteres, y un entero solo números','Un entero almacena números sin decimales, mientras que un flotante incluye decimales','Ambos pueden almacenar números con decimales'],correct:1,fb:'int = enteros sin decimales (1, 2, -5). float = números con decimales (3.14, -0.5).'},
+{q:'¿Cuál es la principal diferencia entre for y while?',opts:['for se usa cuando se conoce el número de iteraciones y while se usa para condiciones','No hay diferencia, ambos repiten código.','for se usa para condiciones indefinidas y while para condiciones definidas'],correct:0,fb:'for = número de iteraciones conocido. while = se repite mientras una condición sea true.'}
+]},
+{id:'pyvar',title:'Python — Variables y Listas',icon:'🐍',color:'#ff9600',color2:'#cc7a00',questions:[
+{q:'¿Qué es una variable en Python?',opts:['Una constante cuyo valor no puede cambiar','Un contenedor para almacenar datos que puede cambiar durante la ejecución','Una función que devuelve un valor'],correct:1,fb:'Una variable es un espacio en memoria con nombre. Su valor puede cambiar: x=5 luego x=10.'},
+{q:'¿Cuál es una regla para nombrar variables en Python?',opts:['Deben comenzar con una letra o un guion bajo','Pueden contener espacios en su nombre','Pueden comenzar con un número'],correct:0,fb:'Reglas Python: empezar con letra o _, sin espacios. Válido: mi_var, _dato. Inválido: 2var, mi var.'},
+{q:'¿Qué tipo de dato es x después de: x = 3.14',opts:['str','int','float'],correct:2,fb:'3.14 tiene decimales → float. x=3 sería int. x="3.14" sería str.',code:'x = 3.14\nprint(type(x))  # float'},
+{q:'¿Qué hace mi_lista.append(4) si mi_lista = [1, 2, 3]?',opts:['Inserta el 4 al principio','Añade el 4 al final.','Sustituye el último elemento por 4'],correct:1,fb:'append() siempre añade al FINAL. Resultado: [1, 2, 3, 4]',code:'mi_lista = [1, 2, 3]\nmi_lista.append(4)\nprint(mi_lista)  # [1, 2, 3, 4]'},
+{q:'¿Cómo accedes al segundo elemento de la lista nombres?',opts:['nombres[2]','nombres[1]','nombres[-1]'],correct:1,fb:'Índice 0 = primer elemento. Índice 1 = segundo. nombres[-1] = último.',code:'nombres = ["Ana", "Luis", "Eva"]\nprint(nombres[1])  # Luis'},
+{q:'¿Cuál es la salida de mi_lista[1:4] si mi_lista = [1, 2, 3, 4, 5]?',opts:['[1, 2, 3]','[1, 2, 3, 4]','[2, 3, 4]'],correct:2,fb:'Slicing [1:4] = desde índice 1 hasta 4 sin incluirlo. Índices 1,2,3 = valores 2,3,4.',code:'mi_lista = [1, 2, 3, 4, 5]\nprint(mi_lista[1:4])  # [2, 3, 4]'},
+{q:'¿Qué devuelve len([5, 10, 15])?',opts:['3','15','2'],correct:0,fb:'len() devuelve el número de elementos. [5,10,15] tiene 3 elementos → len()=3.',code:'mi_lista = [5, 10, 15]\nprint(len(mi_lista))  # 3'}
+]},
+{id:'struct',title:'Estructuras de Datos',icon:'📦',color:'#00b8a9',color2:'#008a80',questions:[
+{q:'¿Es posible usar una lista como clave en un diccionario?',opts:['No, porque las claves deben ser inmutables y las listas son mutables.','Sí, siempre que no cambies la lista después.','No, porque los diccionarios solo aceptan enteros como claves.'],correct:0,fb:'Las claves de un diccionario deben ser INMUTABLES. Las listas son mutables → TypeError si las usas como clave.'},
+{q:'¿Son las cadenas de texto en Python inmutables?',opts:['Sí, porque cualquier modificación genera una nueva cadena sin alterar la original.','Sí, pero solo si la cadena tiene menos de 256 caracteres.','No, porque puedes usar métodos como replace para modificarlas.'],correct:0,fb:'Las strings son INMUTABLES. s.replace() devuelve una NUEVA cadena, no modifica la original.',code:'s = "hola"\ns2 = s.replace("h","H")\nprint(s)   # hola\nprint(s2)  # Hola'},
+{q:'¿Cómo se diferencia una tupla de una lista?',opts:['Es una lista que solo puede contener números','Es una estructura de datos que puede modificarse','Es similar pero es inmutable'],correct:2,fb:'Tupla = inmutable. Lista = mutable. Tupla: (1,2,3). Lista: [1,2,3].',code:'lista = [1, 2, 3]  # mutable\ntupla = (1, 2, 3)  # inmutable\nlista[0] = 99      # OK\ntupla[0] = 99      # TypeError'},
+{q:'¿Qué método convierte una cadena en lista de palabras?',opts:['partition()','split()','join()'],correct:1,fb:'split() divide en lista según un delimitador. join() hace lo contrario (une lista en cadena).',code:'"hola mundo".split()   # ["hola","mundo"]\n"a,b,c".split(",")     # ["a","b","c"]'},
+{q:'¿Qué métodos usas para iterar sobre un diccionario?',opts:['get(), set(), update()','keys(), values(), items()','append(), extend(), pop()'],correct:1,fb:'keys() → claves, values() → valores, items() → pares (clave,valor).',code:'d = {"a":1,"b":2}\nd.keys()    # dict_keys(["a","b"])\nd.values()  # dict_values([1,2])\nd.items()   # dict_items([("a",1),("b",2)])'},
+{q:'¿Cuál es la ventaja de usar un set en lugar de una lista?',opts:['Los sets permiten almacenar valores duplicados.','Los sets son más fáciles de ordenar.','Los sets tienen una búsqueda más rápida gracias a su implementación basada en hash.'],correct:2,fb:'Set usa hash → búsqueda O(1) vs lista O(n). Los sets NO permiten duplicados.',code:'mi_set = {1,2,3,2,1}\nprint(mi_set)  # {1,2,3}'},
+{q:'¿Cómo simulas una constante en Python?',opts:['Usando variables con nombres en MAYÚSCULAS como convención.','Usando la palabra clave const en Python.','Usando variables globales con nombres en minúscula.'],correct:0,fb:'Python no tiene const. Convención: MAYÚSCULAS indican constante. PI = 3.14159',code:'PI = 3.14159\nMAX_SIZE = 100'},
+{q:'¿Puedes modificar la lista dentro de my_tuple = (1, 2, [3, 4])?',opts:['Sí, porque aunque la tupla es inmutable, los objetos mutables dentro de ella sí pueden modificarse.','No, porque las tuplas son inmutables y no permiten ninguna modificación.','No, porque los elementos dentro de una tupla también son inmutables.'],correct:0,fb:'La tupla no puede cambiar qué objetos contiene, pero si contiene una lista mutable, esa lista SÍ puede modificarse.',code:'my_tuple = (1,2,[3,4])\nmy_tuple[2].append(5)  # OK\nprint(my_tuple)  # (1,2,[3,4,5])'}
+]},
+{id:'func',title:'Funciones en Python',icon:'🔧',color:'#ff6b9d',color2:'#cc4477',questions:[
+{q:'¿Cómo se define una función en Python?',opts:['def mi_funcion():','define mi_funcion():','func mi_funcion():','function mi_funcion():'],correct:0,fb:'La palabra clave es def seguida del nombre y paréntesis.',code:'def mi_funcion():\n    print("Hola!")'},
+{q:'¿Qué palabra clave devuelve un valor desde una función?',opts:['return','send','yield','output'],correct:0,fb:'return devuelve el valor y termina la función. yield es para generadores.',code:'def suma(a,b):\n    return a + b\nresultado = suma(3,4)  # 7'},
+{q:'¿Qué se imprime?\ndef suma(a, b): return a + b\nprint(suma(2, 3))',opts:['Error','6','23','5'],correct:3,fb:'suma(2,3) = 2+3 = 5. No es 6, no es 23 (eso sería concatenación de strings).',code:'def suma(a,b):\n    return a + b\nprint(suma(2,3))  # 5'},
+{q:'¿Qué sucede si una función no tiene return?',opts:['Devuelve 0','Devuelve una cadena vacía','Da error','Devuelve None'],correct:3,fb:'En Python, si no hay return, la función devuelve None automáticamente.',code:'def sin_return():\n    x = 5\nresult = sin_return()\nprint(result)  # None'},
+{q:'¿Cómo se llama a una función en Python?',opts:['call(funcion)','funcion()','call funcion()','funcion.call()'],correct:1,fb:'Para llamar una función se escribe su nombre seguido de paréntesis.',code:'def saludar():\n    print("Hola!")\nsaludar()  # así se llama'},
+{q:'¿Cuál es la salida?\ndef saludar(nombre="Mundo"): print(f"Hola, {nombre}")\nsaludar()',opts:['Hola, nombre','Hola, Mundo','Hola','Error'],correct:1,fb:'"Mundo" es el valor por defecto. Si llamas sin argumentos usa el valor por defecto.',code:'saludar()         # Hola, Mundo\nsaludar("David")  # Hola, David'},
+{q:'¿Qué parámetro acepta un número variable de argumentos posicionales?',opts:['**kwargs','varargs','listargs','*args'],correct:3,fb:'*args acepta N argumentos posicionales → tupla. **kwargs acepta N con nombre → diccionario.',code:'def suma(*args):\n    return sum(args)\nsuma(1,2,3)      # 6\nsuma(1,2,3,4,5)  # 15'}
+]},
+{id:'mods',title:'Módulos y Librerías',icon:'📚',color:'#ce82ff',color2:'#9b59b6',questions:[
+{q:'¿Cómo se importa un módulo en Python?',opts:['include modulo','using modulo','import modulo','load modulo'],correct:2,fb:'La palabra clave es import. En otros lenguajes es include (C/C++), using (C#) o require (JavaScript).',code:'import math\nimport random\nimport os'},
+{q:'¿Qué extensión tienen normalmente los módulos de Python?',opts:['.lib','.py','.txt','.mod'],correct:1,fb:'Los archivos Python tienen extensión .py. Un módulo es simplemente un archivo .py con funciones o clases.'},
+{q:'¿Qué hace: from math import sqrt?',opts:['Crea un nuevo módulo llamado sqrt','Importa solo la función sqrt del módulo math','Borra el módulo math','Importa todo el módulo math'],correct:1,fb:'from X import Y → importa SOLO Y. Ventaja: escribes sqrt() en vez de math.sqrt().',code:'from math import sqrt\nprint(sqrt(16))  # 4.0'},
+{q:'¿Cómo accedes a una función de un módulo importado?',opts:['modulo/funcion()','modulo -> funcion()','modulo.funcion()','modulo::funcion()'],correct:2,fb:'La notación de punto (.) es la forma estándar en Python.',code:'import math\nprint(math.sqrt(25))  # 5.0\nprint(math.pi)        # 3.14159'},
+{q:'¿Qué palabra clave renombra un módulo al importarlo?',opts:['rename','alias','using','as'],correct:3,fb:'as permite crear un alias. Muy común: import numpy as np, import pandas as pd.',code:'import numpy as np\nimport pandas as pd\nnp.array([1,2,3])'},
+{q:'¿Qué es una librería en Python?',opts:['Un conjunto de funciones sin organización','Un único módulo','Una colección de módulos relacionados','Un solo archivo de texto'],correct:2,fb:'Librería = colección de módulos relacionados. NumPy es una librería con muchos módulos.'},
+{q:'¿Qué comando instala una librería externa?',opts:['import nombre_libreria','pip download nombre_libreria','pip install nombre_libreria','install nombre_libreria'],correct:2,fb:'pip install es el comando estándar para instalar librerías de PyPI.',code:'pip install numpy\npip install pandas\npip install requests'}
+]}
 ];
 
-// ── BUILD HOME ──
 function buildHome(){
-  const grid=document.getElementById('topics-grid');
-  const colors=['#1cb0f6','#58cc02','#ce82ff','#ff9600'];
-  const after=['#0b8fc2','#46a302','#9b59b6','#cc7a00'];
-  grid.innerHTML=TOPICS.map((t,i)=>`
-    <div class="topic-card" onclick="startTopic(${i})" style="--tc:${t.color}">
-      <style>.topic-card:nth-child(${i+1})::after{background:${t.color}}</style>
-      <span class="topic-icon">${t.icon}</span>
-      <div class="topic-title">${t.title}</div>
-      <div class="topic-desc">${t.desc}</div>
-      <span class="topic-count" style="background:${t.color}22;color:${t.color}">${t.questions.length} preguntas</span>
-    </div>`).join('');
+  var grid=document.getElementById('topics-grid');
+  grid.innerHTML='';
+  for(var i=0;i<TOPICS.length;i++){
+    (function(t,idx){
+      var card=document.createElement('div');
+      card.className='topic-card';
+      card.style.borderBottom='4px solid '+t.color;
+      card.innerHTML='<span class="topic-icon">'+t.icon+'</span><div class="topic-title" style="color:'+t.color+'">'+t.title+'</div><div class="topic-desc" style="margin-top:4px">'+t.questions.length+' preguntas</div><span class="topic-count" style="background:'+t.color+'22;color:'+t.color+'">Empezar →</span>';
+      card.onclick=function(){startTopic(idx);};
+      grid.appendChild(card);
+    })(TOPICS[i],i);
+  }
 }
 
-// ── QUIZ ENGINE ──
-let curTopic=null,qs=[],qIdx=0,qScore=0,qStreak=0,qTv=100,qTimer=null,qCorrect=0;
+var curT=null,qs=[],qI=0,qSc=0,qStr=0,qTv=100,qTmr=null,qCor=0;
 
 function startTopic(idx){
-  curTopic=TOPICS[idx];
-  qs=[...curTopic.questions].sort(()=>Math.random()-0.5);
-  qIdx=0;qScore=0;qStreak=0;qCorrect=0;
+  curT=TOPICS[idx];
+  qs=curT.questions.slice().sort(function(){return Math.random()-0.5;});
+  qI=0;qSc=0;qStr=0;qCor=0;
   document.getElementById('q-score').textContent=0;
   document.getElementById('streak-disp').textContent='';
-  document.getElementById('q-topic-label').textContent=curTopic.title;
-  document.getElementById('q-prog').className='prog-bar '+curTopic.pbClass;
-  document.querySelectorAll('.next-btn').forEach(b=>{b.style.background=curTopic.color;b.style.boxShadowColor=curTopic.color2;b.style.boxShadow='0 4px 0 '+curTopic.color2;});
+  document.getElementById('q-topic-label').textContent=curT.title;
+  document.getElementById('q-prog').style.background='linear-gradient(90deg,'+curT.color+','+curT.color+'99)';
   document.getElementById('screen-home').classList.remove('active');
   document.getElementById('screen-quiz').classList.add('active');
-  playS('nav');
   showQ();
 }
 
 function goHome(){
-  clearInterval(qTimer);
+  clearInterval(qTmr);
   document.getElementById('screen-quiz').classList.remove('active');
   document.getElementById('screen-home').classList.add('active');
-  updateUI();
-  playS('nav');
+  updUI();
 }
 
 function showQ(){
-  if(qIdx>=qs.length){quizEnd();return;}
-  const q=qs[qIdx];
-  const pct=Math.round(qIdx/qs.length*100);
-  document.getElementById('q-prog').style.width=pct+'%';
-  document.getElementById('q-count').textContent='Pregunta '+(qIdx+1)+' de '+qs.length;
-
-  let codeHtml='';
-  if(q.code){codeHtml=`<div class="quiz-code">${q.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;}
-
-  document.getElementById('quiz-area').innerHTML=`
-    <div class="quiz-card">
-      <span class="quiz-topic-tag" style="background:${curTopic.color}22;color:${curTopic.color}">${curTopic.icon} ${curTopic.title}</span>
-      <div class="quiz-q">${q.q.replace(/\n/g,'<br>')}</div>
-      ${codeHtml}
-    </div>
-    <div class="quiz-opts" id="qopts">
-      ${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="ansQ(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
-    </div>
-    <div class="quiz-fb" id="qfb"></div>
-    <button class="next-btn" id="qnxt" onclick="nextQ()" style="display:none;background:${curTopic.color};color:white;box-shadow:0 4px 0 ${curTopic.color2}">Siguiente →</button>`;
-
+  if(qI>=qs.length){endQuiz();return;}
+  var q=qs[qI];
+  document.getElementById('q-prog').style.width=Math.round(qI/qs.length*100)+'%';
+  document.getElementById('q-count').textContent='Pregunta '+(qI+1)+' de '+qs.length;
+  var codeHtml=q.code?'<div class="quiz-code">'+escHtml(q.code)+'</div>':'';
+  var optsHtml='';
+  for(var i=0;i<q.opts.length;i++){
+    optsHtml+='<button class="quiz-opt" onclick="ansQ('+i+')">'+String.fromCharCode(65+i)+'. '+q.opts[i]+'</button>';
+  }
+  document.getElementById('quiz-area').innerHTML=
+    '<div class="quiz-card">'+
+      '<span class="quiz-tag" style="background:'+curT.color+'22;color:'+curT.color+'">'+curT.icon+' '+curT.title+'</span>'+
+      '<div class="quiz-q">'+q.q.replace(/\n/g,'<br>')+'</div>'+
+      codeHtml+
+    '</div>'+
+    '<div class="quiz-opts" id="qopts">'+optsHtml+'</div>'+
+    '<div class="quiz-fb" id="qfb"></div>'+
+    '<button class="next-btn" id="qnxt" onclick="nextQ()" style="display:none;background:'+curT.color+';box-shadow:0 4px 0 '+curT.color2+'">Siguiente →</button>';
   startTimer();
 }
 
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
 function startTimer(){
-  clearInterval(qTimer);qTv=100;
-  const bar=document.getElementById('tbar');
+  clearInterval(qTmr);qTv=100;
+  var bar=document.getElementById('tbar');
   bar.style.width='100%';bar.className='';
-  let ticks=0;
-  qTimer=setInterval(()=>{
+  var ticks=0;
+  qTmr=setInterval(function(){
     qTv-=0.5;ticks++;
     bar.style.width=qTv+'%';
     if(qTv<50&&qTv>=25)bar.className='warn';
-    if(qTv<25){bar.className='danger';if(ticks%6===0)playS('tick');}
-    if(qTv<=0){clearInterval(qTimer);timeUp();}
+    if(qTv<25){bar.className='danger';if(ticks%6===0)sTick();}
+    if(qTv<=0){clearInterval(qTmr);timeUp();}
   },100);
 }
 
 function timeUp(){
-  const q=qs[qIdx];
-  document.querySelectorAll('.quiz-opt').forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('reveal');});
-  playS('wrong');qStreak=0;updStreak();
-  state.totalA++;
-  const fb=document.getElementById('qfb');
-  fb.innerHTML='⏱ ¡Tiempo! '+q.fb;fb.className='quiz-fb qf-bad show';
+  var q=qs[qI];
+  document.querySelectorAll('.quiz-opt').forEach(function(b,i){b.disabled=true;if(i===q.correct)b.classList.add('reveal');});
+  sFail();qStr=0;updStreak();ST.totalA++;
+  var fb=document.getElementById('qfb');
+  fb.innerHTML='⏱ Tiempo. '+q.fb;fb.className='quiz-fb qf-bad show';
   document.getElementById('qnxt').style.display='block';
 }
 
 function ansQ(chosen){
-  clearInterval(qTimer);
-  const q=qs[qIdx];
-  state.totalA++;
-  document.querySelectorAll('.quiz-opt').forEach((b,i)=>{
+  clearInterval(qTmr);var q=qs[qI];ST.totalA++;
+  document.querySelectorAll('.quiz-opt').forEach(function(b,i){
     b.disabled=true;
     if(i===q.correct)b.classList.add('correct');
     else if(i===chosen&&chosen!==q.correct)b.classList.add('wrong');
   });
-  const fb=document.getElementById('qfb');
+  var fb=document.getElementById('qfb');
   if(chosen===q.correct){
-    const pts=Math.round(30+qTv*0.7);
-    qScore+=pts;qStreak++;qCorrect++;state.totalC++;
-    playS('correct');
-    if(qStreak>=3)confetti(20);
-    updStreak();
-    document.getElementById('q-score').textContent=qScore;
-    fb.innerHTML=`✅ ¡Correcto! +${pts} XP — ${q.fb}`;
-    fb.className='quiz-fb qf-ok show';
+    var pts=Math.round(30+qTv*0.7);qSc+=pts;qStr++;qCor++;ST.totalC++;
+    sOk();if(qStr>=3)confetti(20);updStreak();
+    document.getElementById('q-score').textContent=qSc;
+    fb.innerHTML='✅ Correcto! +'+pts+' XP — '+q.fb;fb.className='quiz-fb qf-ok show';
   } else {
-    qStreak=0;playS('wrong');updStreak();
-    fb.innerHTML=`❌ Incorrecto. ${q.fb}`;
-    fb.className='quiz-fb qf-bad show';
+    qStr=0;sFail();updStreak();
+    fb.innerHTML='❌ Incorrecto. '+q.fb;fb.className='quiz-fb qf-bad show';
   }
   document.getElementById('qnxt').style.display='block';
 }
 
 function updStreak(){
-  const el=document.getElementById('streak-disp');
-  if(qStreak>=2){
-    el.textContent='🔥'.repeat(Math.min(qStreak,5))+' ¡Racha x'+qStreak+'!';
+  var el=document.getElementById('streak-disp');
+  if(qStr>=2){
+    var f='';for(var i=0;i<Math.min(qStr,5);i++)f+='🔥';
+    el.textContent=f+' Racha x'+qStr+'!';
     el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
-    state.streak=Math.max(state.streak,qStreak);
-    playS('streak');
+    ST.streak=Math.max(ST.streak,qStr);sStr();
   } else el.textContent='';
 }
 
-function nextQ(){qIdx++;showQ();}
+function nextQ(){qI++;showQ();}
 
-function quizEnd(){
-  const pct=Math.round(qCorrect/qs.length*100);
-  const emoji=pct>=80?'🏆':pct>=50?'👍':'📚';
-  const msg=pct>=80?'¡Excelente dominio del tema!':pct>=50?'¡Buen trabajo, sigue así!':'Repasa el tema y vuelve a intentarlo.';
-  state.xp+=qScore;
-  saveState();updateUI();
-  if(pct>=80){confetti(80);playS('win');}
-  document.getElementById('quiz-area').innerHTML=`
-    <div style="background:white;border:2px solid var(--border);border-radius:20px;padding:36px;text-align:center;box-shadow:0 4px 0 var(--border)">
-      <div style="font-size:52px;margin-bottom:14px">${emoji}</div>
-      <div style="font-size:22px;font-weight:900;color:var(--text);margin-bottom:6px">${msg}</div>
-      <div style="font-size:15px;color:var(--muted);margin-bottom:22px">${qCorrect}/${qs.length} correctas · ${pct}% precisión</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:22px">
-        <div style="background:var(--bg);border-radius:12px;padding:14px">
-          <div style="font-size:24px;font-weight:900;color:var(--orange)">${qScore}</div>
-          <div style="font-size:11px;color:var(--muted);font-weight:700">XP ganado</div>
-        </div>
-        <div style="background:var(--bg);border-radius:12px;padding:14px">
-          <div style="font-size:24px;font-weight:900;color:var(--green)">${qCorrect}/${qs.length}</div>
-          <div style="font-size:11px;color:var(--muted);font-weight:700">Correctas</div>
-        </div>
-        <div style="background:var(--bg);border-radius:12px;padding:14px">
-          <div style="font-size:24px;font-weight:900;color:${curTopic.color}">${pct}%</div>
-          <div style="font-size:11px;color:var(--muted);font-weight:700">Precisión</div>
-        </div>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button onclick="startTopic(${TOPICS.indexOf(curTopic)})" style="background:${curTopic.color};color:white;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 0 ${curTopic.color2}">🔄 Repetir</button>
-        <button onclick="goHome()" style="background:var(--bg);color:var(--text);border:2px solid var(--border);border-radius:12px;padding:12px 24px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif">🏠 Inicio</button>
-      </div>
-    </div>`;
+function endQuiz(){
+  var pct=Math.round(qCor/qs.length*100);
+  ST.xp+=qSc;saveS();updUI();
+  if(pct>=80){confetti(80);sWin();}
+  var topicIdx=TOPICS.indexOf(curT);
+  document.getElementById('quiz-area').innerHTML=
+    '<div style="background:white;border:2px solid #e5e5e5;border-radius:18px;padding:32px;text-align:center;box-shadow:0 4px 0 #e5e5e5">'+
+      '<div style="font-size:48px;margin-bottom:12px">'+(pct>=80?'🏆':pct>=50?'👍':'📚')+'</div>'+
+      '<div style="font-size:20px;font-weight:900;margin-bottom:6px">'+(pct>=80?'¡Excelente!':pct>=50?'¡Bien hecho!':'Repasa y vuelve a intentarlo.')+'</div>'+
+      '<div style="font-size:14px;color:#afafaf;margin-bottom:20px">'+qCor+'/'+qs.length+' correctas · '+pct+'% precisión</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px">'+
+        '<div style="background:#f0f4ff;border-radius:12px;padding:12px"><div style="font-size:22px;font-weight:900;color:#ff9600">'+qSc+'</div><div style="font-size:11px;color:#afafaf;font-weight:700">XP ganado</div></div>'+
+        '<div style="background:#f0f4ff;border-radius:12px;padding:12px"><div style="font-size:22px;font-weight:900;color:#58cc02">'+qCor+'/'+qs.length+'</div><div style="font-size:11px;color:#afafaf;font-weight:700">Correctas</div></div>'+
+        '<div style="background:#f0f4ff;border-radius:12px;padding:12px"><div style="font-size:22px;font-weight:900;color:'+curT.color+'">'+pct+'%</div><div style="font-size:11px;color:#afafaf;font-weight:700">Precisión</div></div>'+
+      '</div>'+
+      '<div style="display:flex;gap:10px;justify-content:center">'+
+        '<button onclick="startTopic('+topicIdx+')" style="background:'+curT.color+';color:white;border:none;border-radius:12px;padding:12px 22px;font-size:14px;font-weight:800;cursor:pointer;font-family:Nunito,sans-serif;box-shadow:0 4px 0 '+curT.color2+'">🔄 Repetir</button>'+
+        '<button onclick="goHome()" style="background:#f0f4ff;color:#3c3c3c;border:2px solid #e5e5e5;border-radius:12px;padding:12px 22px;font-size:14px;font-weight:800;cursor:pointer;font-family:Nunito,sans-serif">🏠 Inicio</button>'+
+      '</div>'+
+    '</div>';
   document.getElementById('q-prog').style.width='100%';
-  showToast('⭐ +'+qScore+' XP añadidos!');
+  showToast('⭐ +'+qSc+' XP añadidos!');
 }
 
 buildHome();
-updateUI();
+updUI();
 document.addEventListener('click',rac,{once:true});
 </script>
 </body>
