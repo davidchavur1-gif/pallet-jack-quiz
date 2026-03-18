@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2 English — Prefijos & Sufijos</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c1: #ff6b6b; --c2: #ffd93d; --c3: #6bcb77; --c4: #4d96ff;
+  --c5: #ff6bdf; --c6: #ff9a3c; --c7: #a8ff78; --c8: #78d6ff;
+  --dark: #1a1a2e; --darker: #12122a; --card-bg: #ffffff;
+  --text: #1a1a2e; --muted: #6b7280;
+  --shadow: 0 6px 0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--dark);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* PARTICLES BG */
+.particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: float linear infinite;
+}
+@keyframes float {
+  from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.15; }
+  90% { opacity: 0.15; }
+  to { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+}
+
+/* HEADER */
+header {
+  position: relative; z-index: 10;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-bottom: 3px solid rgba(255,255,255,0.1);
+  padding: 12px 20px;
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap;
+}
+.logo {
+  font-family: 'Fredoka One', cursive;
+  font-size: 26px;
+  background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3), var(--c4));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.badge {
+  background: linear-gradient(135deg, var(--c4), var(--c5));
+  padding: 4px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; color: white;
+}
+.xp-wrap { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.xp-num { font-weight: 900; font-size: 16px; color: var(--c2); font-family: 'Fredoka One', cursive; }
+.xp-bar { width: 120px; height: 12px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; }
+.xp-fill { height: 100%; background: linear-gradient(90deg, var(--c2), var(--c6)); border-radius: 99px; transition: width 0.5s cubic-bezier(.34,1.56,.64,1); width: 0%; }
+.lives { font-size: 20px; letter-spacing: 2px; }
+
+/* TABS */
+.tabs {
+  position: relative; z-index: 10;
+  display: flex; gap: 6px; padding: 16px 20px 0;
+  max-width: 860px; margin: 0 auto;
+}
+.tab {
+  padding: 10px 22px; border-radius: 14px 14px 0 0;
+  font-family: 'Fredoka One', cursive; font-size: 16px;
+  cursor: pointer; border: none; transition: all 0.2s;
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+}
+.tab.active { background: #ffffff; color: var(--dark); }
+.tab:hover:not(.active) { background: rgba(255,255,255,0.15); color: white; }
+
+/* MAIN */
+main {
+  position: relative; z-index: 10;
+  max-width: 860px; margin: 0 auto;
+  padding: 0 20px 80px;
+}
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* SECTION HEADER */
+.sec-head {
+  background: rgba(255,255,255,0.05);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 0 20px 20px 20px;
+  padding: 18px 22px; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 14px;
+}
+.sec-head .icon { font-size: 32px; }
+.sec-head h2 { font-family: 'Fredoka One', cursive; font-size: 22px; }
+.sec-head p { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 600; margin-top: 2px; }
+
+/* PROGRESS */
+.prog-wrap {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 10px 16px; margin-bottom: 20px;
+}
+.prog-track { flex: 1; height: 14px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 99px; transition: width 0.5s ease; background: linear-gradient(90deg, var(--c3), var(--c4)); }
+.prog-txt { font-weight: 900; font-size: 14px; color: var(--c3); white-space: nowrap; font-family: 'Fredoka One', cursive; }
+
+/* FILTER CHIPS */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.chip {
+  padding: 6px 18px; border-radius: 99px;
+  font-weight: 800; font-size: 12px; cursor: pointer;
+  border: 2px solid transparent; transition: all 0.2s;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.chip.active { border-color: currentColor; transform: scale(1.05); }
+.chip-all { background: rgba(255,255,255,0.1); color: white; }
+.chip-suf { background: rgba(107,203,119,0.2); color: var(--c3); }
+.chip-pre { background: rgba(77,150,255,0.2); color: var(--c4); }
+.chip-spell { background: rgba(255,107,107,0.2); color: var(--c1); }
+.chip-strat { background: rgba(255,217,61,0.2); color: var(--c2); }
+
+/* FLASHCARD */
+.fc-wrap { perspective: 1200px; margin-bottom: 16px; }
+.flashcard {
+  width: 100%; min-height: 260px;
+  position: relative; transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(.68,-.55,.27,1.55);
+  cursor: pointer;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.card-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: 24px; border: 3px solid transparent;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 32px; text-align: center;
+  min-height: 260px;
+}
+.card-front { background: linear-gradient(135deg, #1e3a5f, #0d2137); border-color: var(--c4); }
+.card-back { transform: rotateY(180deg); border-color: var(--c3); }
+
+/* Dynamic card back colors per topic */
+.card-back.suf { background: linear-gradient(135deg, #0d3320, #0a2010); }
+.card-back.pre { background: linear-gradient(135deg, #1a1050, #0d0a30); }
+.card-back.spell { background: linear-gradient(135deg, #3d0a0a, #200505); }
+.card-back.strat { background: linear-gradient(135deg, #3d2a00, #201500); }
+
+.ctag {
+  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1.5px; padding: 5px 14px; border-radius: 99px;
+  margin-bottom: 18px; color: white;
+}
+.ctag-front { background: var(--c4); }
+.ctag-back.suf { background: var(--c3); }
+.ctag-back.pre { background: var(--c4); }
+.ctag-back.spell { background: var(--c1); }
+.ctag-back.strat { background: var(--c2); color: var(--dark); }
+
+.card-q { font-family: 'Fredoka One', cursive; font-size: 24px; color: white; line-height: 1.3; margin-bottom: 8px; }
+.card-hint { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 600; }
+.card-a { font-size: 17px; font-weight: 700; color: white; line-height: 1.6; }
+.card-a code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255,255,255,0.12); padding: 2px 8px;
+  border-radius: 6px; font-size: 15px; color: var(--c2);
+}
+.card-a .good { color: var(--c3); font-weight: 900; }
+.card-a .bad { color: var(--c1); text-decoration: line-through; }
+
+.flip-hint { text-align: center; font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 700; margin-top: 10px; }
+
+/* SOUND INDICATOR */
+.sound-wave {
+  display: flex; align-items: center; gap: 3px;
+  position: absolute; top: 14px; right: 16px;
+}
+.sound-wave span {
+  width: 3px; background: rgba(255,255,255,0.4); border-radius: 99px;
+  animation: wave 1s ease-in-out infinite;
+}
+.sound-wave span:nth-child(1) { height: 8px; animation-delay: 0s; }
+.sound-wave span:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+.sound-wave span:nth-child(3) { height: 20px; animation-delay: 0.2s; }
+.sound-wave span:nth-child(4) { height: 14px; animation-delay: 0.3s; }
+.sound-wave span:nth-child(5) { height: 8px; animation-delay: 0.4s; }
+@keyframes wave { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(0.4); } }
+
+/* NAV */
+.card-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 14px 0 28px; }
+.btn {
+  padding: 12px 28px; border-radius: 14px;
+  font-family: 'Fredoka One', cursive; font-size: 17px;
+  cursor: pointer; border: none; transition: all 0.15s; color: white;
+}
+.btn:active { transform: translateY(3px); box-shadow: none !important; }
+.btn-prev { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); box-shadow: 0 4px 0 rgba(0,0,0,0.3); }
+.btn-prev:hover { background: rgba(255,255,255,0.2); }
+.btn-next { background: var(--c3); color: var(--dark); box-shadow: 0 4px 0 #3a8f46; }
+.btn-next:hover { background: #7de882; }
+.card-ctr { font-family: 'Fredoka One', cursive; font-size: 18px; color: rgba(255,255,255,0.5); }
+
+/* ═══ QUIZ ═══ */
+.quiz-card {
+  background: rgba(255,255,255,0.05); border: 3px solid rgba(255,255,255,0.1);
+  border-radius: 24px; padding: 28px; margin-bottom: 20px;
+  position: relative; overflow: hidden;
+}
+.quiz-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(77,150,255,0.05), rgba(107,203,119,0.05));
+  pointer-events: none;
+}
+.q-cat {
+  font-size: 12px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--c4); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.q-text {
+  font-family: 'Fredoka One', cursive; font-size: 21px;
+  color: white; line-height: 1.4; margin-bottom: 22px;
+}
+.q-text code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255,217,61,0.15); padding: 2px 8px;
+  border-radius: 6px; font-size: 18px; color: var(--c2);
+}
+.q-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.q-opt {
+  padding: 14px 16px; border-radius: 16px;
+  border: 3px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 15px;
+  cursor: pointer; text-align: left; transition: all 0.15s; color: white;
+  line-height: 1.3;
+}
+.q-opt:hover:not(:disabled) {
+  border-color: var(--c4); background: rgba(77,150,255,0.15);
+  transform: translateY(-2px); box-shadow: 0 4px 0 rgba(77,150,255,0.3);
+}
+.q-opt.correct { border-color: var(--c3); background: rgba(107,203,119,0.2); color: var(--c3); box-shadow: 0 4px 0 rgba(107,203,119,0.4); }
+.q-opt.wrong { border-color: var(--c1); background: rgba(255,107,107,0.2); color: var(--c1); box-shadow: 0 4px 0 rgba(255,107,107,0.3); }
+.q-opt:disabled { cursor: default; }
+
+/* FEEDBACK */
+.feedback {
+  display: none; border-radius: 16px; padding: 14px 18px;
+  margin-top: 14px; font-weight: 700; font-size: 15px;
+  animation: slideUp 0.3s ease;
+}
+.feedback.show { display: flex; align-items: flex-start; gap: 12px; }
+.fb-correct { background: rgba(107,203,119,0.15); border: 2px solid var(--c3); color: var(--c3); }
+.fb-wrong { background: rgba(255,107,107,0.15); border: 2px solid var(--c1); color: #ff9a9a; }
+.fb-icon { font-size: 24px; flex-shrink: 0; }
+.fb-text strong { display: block; font-size: 17px; font-weight: 900; margin-bottom: 3px; }
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.q-nav { display: flex; justify-content: flex-end; margin-top: 14px; }
+.btn-cont { background: var(--c3); color: var(--dark); box-shadow: 0 4px 0 #3a8f46; display: none; }
+.btn-cont.show { display: block; }
+.btn-cont:hover { background: #7de882; }
+
+/* RESULTS */
+.results {
+  display: none; text-align: center; padding: 50px 20px;
+  background: rgba(255,255,255,0.05); border: 3px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+}
+.results.show { display: block; animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+.res-emoji { font-size: 72px; margin-bottom: 10px; animation: bounce 1s ease infinite; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.res-title { font-family: 'Fredoka One', cursive; font-size: 32px; margin-bottom: 8px; }
+.res-score { font-family: 'Fredoka One', cursive; font-size: 56px; margin: 16px 0; }
+.res-score span { font-size: 24px; color: rgba(255,255,255,0.5); }
+.res-msg { font-size: 16px; color: rgba(255,255,255,0.6); font-weight: 600; margin-bottom: 28px; }
+.btn-retry { background: var(--c4); color: white; box-shadow: 0 4px 0 #2060cc; padding: 14px 44px; font-size: 18px; }
+.btn-retry:hover { background: #6ab0ff; }
+
+/* CONFETTI */
+.confetti-piece {
+  position: fixed; width: 10px; height: 10px;
+  pointer-events: none; z-index: 9999;
+  animation: confettiFall 3s ease-in forwards;
+  border-radius: 2px;
+}
+@keyframes confettiFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* EMOJI BURST */
+.emoji-burst {
+  position: fixed; pointer-events: none; z-index: 9998;
+  font-size: 36px; animation: burstAway 1s ease forwards;
+}
+@keyframes burstAway {
+  0% { transform: translate(0,0) scale(0); opacity: 1; }
+  50% { transform: translate(var(--dx), var(--dy)) scale(1.5); opacity: 1; }
+  100% { transform: translate(calc(var(--dx)*2), calc(var(--dy)*3)) scale(0.5); opacity: 0; }
+}
+
+/* RESUMEN */
+.res-block {
+  background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 22px; margin-bottom: 14px;
+}
+.res-block h3 { font-family: 'Fredoka One', cursive; font-size: 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.res-block p, .res-block li { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 3px; }
+.res-block ul { padding-left: 20px; }
+.res-block code { font-family: 'JetBrains Mono', monospace; background: rgba(255,255,255,0.1); padding: 1px 7px; border-radius: 5px; font-size: 13px; color: var(--c2); }
+.res-block .good { color: var(--c3); font-weight: 900; }
+.res-block .bad { color: var(--c1); text-decoration: line-through; }
+.tbadge { display: inline-block; padding: 3px 12px; border-radius: 99px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.tbadge-suf { background: rgba(107,203,119,0.3); color: var(--c3); }
+.tbadge-pre { background: rgba(77,150,255,0.3); color: var(--c4); }
+.tbadge-spell { background: rgba(255,107,107,0.3); color: var(--c1); }
+.tbadge-strat { background: rgba(255,217,61,0.3); color: var(--c2); }
+.tw { overflow-x: auto; margin-top: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: rgba(255,255,255,0.08); font-weight: 800; padding: 10px 12px; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
+td { padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,0.07); font-weight: 600; color: rgba(255,255,255,0.75); }
+tr:last-child td { border-bottom: none; }
+td code { font-family: 'JetBrains Mono', monospace; background: rgba(255,255,255,0.08); padding: 1px 6px; border-radius: 4px; color: var(--c2); font-size: 12px; }
+
+/* ANIMATIONS */
+@keyframes cardBounce { 0%,100% { transform: translateY(0); } 30% { transform: translateY(-12px); } 60% { transform: translateY(-6px); } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-8px); } 40%,80% { transform: translateX(8px); } }
+@keyframes rainbow { 0% { border-color: var(--c1); } 20% { border-color: var(--c2); } 40% { border-color: var(--c3); } 60% { border-color: var(--c4); } 80% { border-color: var(--c5); } 100% { border-color: var(--c1); } }
+
+.anim-bounce { animation: cardBounce 0.6s ease; }
+.anim-shake { animation: shake 0.5s ease; }
+.anim-rainbow { animation: rainbow 0.8s linear; }
+
+@media (max-width: 540px) {
+  .q-opts { grid-template-columns: 1fr; }
+  .card-q { font-size: 19px; }
+  main { padding: 0 12px 80px; }
+  .tabs { padding: 12px 12px 0; gap: 4px; }
+  .tab { padding: 8px 14px; font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<header>
+  <div class="logo">B2 English</div>
+  <div class="badge">Prefijos & Sufijos</div>
+  <div class="xp-wrap">
+    <div class="lives" id="lives">❤️❤️❤️</div>
+    <span class="xp-num">⚡<span id="xpNum">0</span></span>
+    <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showSec('flashcards',this)">📇 Flashcards</button>
+  <button class="tab" onclick="showSec('quiz',this)">🧠 Quiz</button>
+  <button class="tab" onclick="showSec('resumen',this)">📖 Resumen</button>
+</div>
+
+<main>
+
+<!-- ══ FLASHCARDS ══ -->
+<div class="section active" id="flashcards">
+  <div class="sec-head">
+    <span class="icon">📇</span>
+    <div><h2>Tarjetas de Memorización</h2><p>Cada tarjeta tiene su propio sonido 🎵 — ¡toca para voltear!</p></div>
+  </div>
+  <div class="chips">
+    <button class="chip chip-all active" onclick="filterCards('all',this)">🌐 Todas</button>
+    <button class="chip chip-suf" onclick="filterCards('suf',this)">✅ Sufijos</button>
+    <button class="chip chip-pre" onclick="filterCards('pre',this)">🔵 Prefijos</button>
+    <button class="chip chip-spell" onclick="filterCards('spell',this)">⚠️ Spelling</button>
+    <button class="chip chip-strat" onclick="filterCards('strat',this)">🎯 Estrategia</button>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-track"><div class="prog-fill" id="cardProg" style="width:0%"></div></div>
+    <span class="prog-txt" id="cardCtr">1 / 25</span>
+  </div>
+  <div class="fc-wrap">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="card-face card-front">
+        <div class="sound-wave"><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="ctag ctag-front">Concepto</span>
+        <div class="card-q" id="cardQ"></div>
+        <div class="card-hint" id="cardHint"></div>
+      </div>
+      <div class="card-face card-back" id="cardBack">
+        <span class="ctag ctag-back" id="cardBackTag">Respuesta</span>
+        <div class="card-a" id="cardA"></div>
+      </div>
+    </div>
+  </div>
+  <p class="flip-hint">👆 Toca la tarjeta para voltearla y escuchar el sonido</p>
+  <div class="card-nav" style="margin-top:14px;">
+    <button class="btn btn-prev" onclick="prevCard()">← Anterior</button>
+    <span class="card-ctr" id="cardNum">1 / 25</span>
+    <button class="btn btn-next" onclick="nextCard()">Siguiente →</button>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div class="section" id="quiz">
+  <div class="sec-head">
+    <span class="icon">🧠</span>
+    <div><h2>Quiz Interactivo</h2><p>¡Responde y gana XP! Los errores cuestan una vida ❤️</p></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-track"><div class="prog-fill" id="quizProg" style="width:0%"></div></div>
+    <span class="prog-txt" id="quizCtr">1 / 18</span>
+  </div>
+  <div id="quizArea">
+    <div class="quiz-card" id="quizCard">
+      <div class="q-cat" id="qCat"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="q-opts" id="qOpts"></div>
+      <div class="feedback" id="feedback">
+        <span class="fb-icon" id="fbIcon"></span>
+        <div class="fb-text" id="fbText"></div>
+      </div>
+      <div class="q-nav">
+        <button class="btn btn-cont" id="btnCont" onclick="nextQ()">Continuar →</button>
+      </div>
+    </div>
+  </div>
+  <div class="results" id="results">
+    <div class="res-emoji" id="resEmoji">🏆</div>
+    <div class="res-title" id="resTitle">¡Quiz completado!</div>
+    <div class="res-score"><span id="resCorrect">0</span> / <span id="resTotal">18</span> <span>correctas</span></div>
+    <div class="res-msg" id="resMsg"></div>
+    <button class="btn btn-retry" onclick="restartQuiz()">🔄 Repetir Quiz</button>
+  </div>
+</div>
+
+<!-- ══ RESUMEN ══ -->
+<div class="section" id="resumen">
+  <div class="sec-head">
+    <span class="icon">📖</span>
+    <div><h2>Resumen Teórico</h2><p>Toda la teoría en un vistazo</p></div>
+  </div>
+
+  <div class="res-block">
+    <h3>✅ <span class="tbadge tbadge-suf">Sufijos</span> &nbsp;Sustantivo → Adjetivo</h3>
+    <div class="tw"><table>
+      <tr><th>Sufijo</th><th>Ejemplo</th><th>Resultado</th></tr>
+      <tr><td><code>-ful</code></td><td>help</td><td>help<strong>ful</strong></td></tr>
+      <tr><td><code>-less</code></td><td>help</td><td>help<strong>less</strong></td></tr>
+      <tr><td><code>-ous</code></td><td>danger</td><td>danger<strong>ous</strong></td></tr>
+      <tr><td><code>-al</code></td><td>emotion</td><td>emotion<strong>al</strong></td></tr>
+      <tr><td><code>-ic</code></td><td>artist</td><td>artist<strong>ic</strong></td></tr>
+      <tr><td><code>-ish</code></td><td>fool</td><td>fool<strong>ish</strong></td></tr>
+      <tr><td><code>-ive</code></td><td>compete</td><td>compet<strong>itive</strong></td></tr>
+      <tr><td><code>-able</code></td><td>rely</td><td>reli<strong>able</strong></td></tr>
+      <tr><td><code>-y</code></td><td>greed</td><td>greed<strong>y</strong></td></tr>
+    </table></div>
+  </div>
+
+  <div class="res-block">
+    <h3>✅ <span class="tbadge tbadge-suf">Sufijos</span> &nbsp;→ Sustantivo</h3>
+    <div class="tw"><table>
+      <tr><th>Sufijo</th><th>Ejemplo</th><th>Resultado</th></tr>
+      <tr><td><code>-ness</code></td><td>happy</td><td>happi<strong>ness</strong></td></tr>
+      <tr><td><code>-tion/-sion</code></td><td>compete</td><td>competi<strong>tion</strong></td></tr>
+      <tr><td><code>-ity</code></td><td>popular</td><td>popular<strong>ity</strong></td></tr>
+      <tr><td><code>-ment</code></td><td>enjoy</td><td>enjoy<strong>ment</strong></td></tr>
+      <tr><td><code>-ance/-ence</code></td><td>confident</td><td>confid<strong>ence</strong></td></tr>
+      <tr><td><code>-ly</code></td><td>quick</td><td>quick<strong>ly</strong></td></tr>
+    </table></div>
+  </div>
+
+  <div class="res-block">
+    <h3>🔵 <span class="tbadge tbadge-pre">Prefijos</span> &nbsp;Negación y significado</h3>
+    <div class="tw"><table>
+      <tr><th>Prefijo</th><th>Significado</th><th>Ejemplo</th></tr>
+      <tr><td><code>un-</code></td><td>negación general</td><td><strong>un</strong>happy</td></tr>
+      <tr><td><code>im-</code></td><td>negación (p/b/m)</td><td><strong>im</strong>possible</td></tr>
+      <tr><td><code>in-</code></td><td>negación</td><td><strong>in</strong>correct</td></tr>
+      <tr><td><code>dis-</code></td><td>opuesto</td><td><strong>dis</strong>agree</td></tr>
+      <tr><td><code>re-</code></td><td>repetición</td><td><strong>re</strong>do</td></tr>
+      <tr><td><code>over-</code></td><td>exceso</td><td><strong>over</strong>work</td></tr>
+    </table></div>
+  </div>
+
+  <div class="res-block">
+    <h3>⚠️ <span class="tbadge tbadge-spell">Spelling</span> &nbsp;Reglas clave</h3>
+    <ul>
+      <li><strong>Y → I</strong> antes de sufijo: happy → happi<strong>ness</strong> <span class="good">✅</span> | <span class="bad">happyness</span> ❌</li>
+      <li><strong>E final desaparece:</strong> compete → competi<strong>tion</strong> <span class="good">✅</span> | <span class="bad">competeetion</span> ❌</li>
+      <li><strong>Consonante se dobla (CVC):</strong> begin → beginn<strong>ing</strong> <span class="good">✅</span> | <span class="bad">begining</span> ❌</li>
+      <li><strong>im- vs in- vs un-:</strong> delante de p/b/m → im- | resto → in- o un-</li>
+    </ul>
+  </div>
+
+  <div class="res-block" style="border-color:rgba(255,217,61,0.4);background:rgba(255,217,61,0.05);">
+    <h3>🎯 <span class="tbadge tbadge-strat">Estrategia</span> &nbsp;Part 3 del examen B2</h3>
+    <p>Ante cada hueco sigue este orden:</p>
+    <ul>
+      <li>1️⃣ <strong>¿Qué categoría necesito?</strong> (sustantivo / adjetivo / adverbio / verbo)</li>
+      <li>2️⃣ <strong>¿Necesito sufijo?</strong> ¿Cuál encaja?</li>
+      <li>3️⃣ <strong>¿Necesito prefijo?</strong> ¿El contexto es negativo?</li>
+      <li>4️⃣ <strong>¿Hay cambio de spelling?</strong> (y→i, e final, consonante doble)</li>
+    </ul>
+    <p style="margin-top:10px;"><strong>Ejemplo:</strong> "The ______ results" → SURPRISE → adjetivo → <span class="good">SURPRISING</span></p>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ══════════════════════════════
+// AUDIO ENGINE (Web Audio API)
+// ══════════════════════════════
+const AC = new (window.AudioContext || window.webkitAudioContext)();
+
+function playTone(freq, type='sine', dur=0.3, vol=0.3, delay=0) {
+  const osc = AC.createOscillator();
+  const gain = AC.createGain();
+  osc.connect(gain); gain.connect(AC.destination);
+  osc.type = type; osc.frequency.value = freq;
+  const t = AC.currentTime + delay;
+  gain.gain.setValueAtTime(0, t);
+  gain.gain.linearRampToValueAtTime(vol, t + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+  osc.start(t); osc.stop(t + dur + 0.05);
+}
+
+// 10 unique card sounds
+const cardSounds = [
+  () => { playTone(523,'sine',0.2,0.3); playTone(659,'sine',0.2,0.25,0.1); playTone(784,'sine',0.2,0.2,0.2); }, // C major arp
+  () => { playTone(440,'triangle',0.3,0.3); playTone(554,'triangle',0.2,0.25,0.15); }, // A minor
+  () => { [300,400,500,600].forEach((f,i) => playTone(f,'square',0.15,0.15,i*0.06)); }, // rising squares
+  () => { playTone(880,'sine',0.15,0.2); playTone(660,'sine',0.15,0.2,0.1); playTone(440,'sine',0.2,0.25,0.2); }, // descending
+  () => { playTone(392,'sawtooth',0.1,0.15); playTone(494,'sawtooth',0.1,0.15,0.08); playTone(587,'sawtooth',0.1,0.15,0.16); playTone(698,'sawtooth',0.1,0.15,0.24); }, // sawtooth scale
+  () => { playTone(1047,'sine',0.08,0.2); playTone(784,'sine',0.1,0.2,0.05); playTone(523,'sine',0.15,0.25,0.12); }, // bell drop
+  () => { [262,330,392,523].forEach((f,i) => playTone(f,'triangle',0.2,0.2,i*0.07)); }, // triangle arp
+  () => { playTone(600,'sine',0.05,0.15); playTone(700,'sine',0.05,0.15,0.05); playTone(800,'sine',0.05,0.15,0.1); playTone(900,'sine',0.1,0.2,0.15); playTone(1000,'sine',0.1,0.2,0.2); }, // ascending ping
+  () => { playTone(440,'sine',0.4,0.3); playTone(443,'sine',0.4,0.25); }, // chorus/beat
+  () => { [523,659,784,1047,784,659,523].forEach((f,i) => playTone(f,'sine',0.12,0.15,i*0.06)); }, // wave
+];
+
+function playCorrect() {
+  playTone(523,'sine',0.15,0.3); playTone(659,'sine',0.15,0.3,0.1);
+  playTone(784,'sine',0.15,0.3,0.2); playTone(1047,'sine',0.3,0.35,0.3);
+}
+function playWrong() {
+  playTone(220,'sawtooth',0.15,0.3); playTone(180,'sawtooth',0.2,0.3,0.15);
+  playTone(150,'sawtooth',0.25,0.3,0.32);
+}
+function playFlip() { playTone(800,'sine',0.08,0.2); playTone(600,'sine',0.06,0.15,0.05); }
+function playLevelUp() {
+  [523,659,784,1047,1319].forEach((f,i) => playTone(f,'sine',0.2,0.3,i*0.08));
+}
+
+// Resume AudioContext on first interaction
+document.addEventListener('click', () => { if(AC.state === 'suspended') AC.resume(); }, { once: true });
+
+// ══════════════════════════════
+// PARTICLES
+// ══════════════════════════════
+const colors = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#ff6bdf','#ff9a3c'];
+for(let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 40 + 10;
+  p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;
+  document.getElementById('particles').appendChild(p);
+}
+
+// ══════════════════════════════
+// DATA — FLASHCARDS
+// ══════════════════════════════
+const allCards = [
+  { topic:'suf', q:'¿Qué sufijo convierte un sustantivo en adjetivo con sentido positivo/lleno?', hint:'help → help___', a:'<code>-ful</code> → help<span class="good">ful</span>, cheer<span class="good">ful</span>, hope<span class="good">ful</span>' },
+  { topic:'suf', q:'¿Qué sufijo significa "sin" o "carente de"?', hint:'hope → hope___', a:'<code>-less</code> → hope<span class="good">less</span>, help<span class="good">less</span>, care<span class="good">less</span>' },
+  { topic:'suf', q:'¿Cómo se forma un adjetivo a partir de "danger"?', hint:'Usa -ous', a:'danger → danger<span class="good">ous</span> ✅<br><span class="bad">dangerable</span> ❌' },
+  { topic:'suf', q:'¿Qué sufijo transforma "emotion" en adjetivo?', hint:'-al', a:'emotion → emotion<span class="good">al</span> ✅<br>También: nation → nation<span class="good">al</span>' },
+  { topic:'suf', q:'¿Qué sufijo convierte "artist" en adjetivo?', hint:'Piensa en -ic', a:'artist → artist<span class="good">ic</span> ✅<br>También: energy → energ<span class="good">etic</span>' },
+  { topic:'suf', q:'¿Qué sufijo transforma "fool" en adjetivo?', hint:'-ish', a:'fool → fool<span class="good">ish</span> ✅<br>También: self<span class="good">ish</span>, child<span class="good">ish</span>' },
+  { topic:'suf', q:'¿Qué sufijo forma adjetivo a partir de "compete"?', hint:'-itive (con cambio)', a:'compete → compet<span class="good">itive</span> ✅<br>La "e" final desaparece ⚠️' },
+  { topic:'suf', q:'¿Cómo se convierte "rely" en adjetivo?', hint:'-able (con cambio de Y)', a:'rely → reli<span class="good">able</span> ✅<br>Y→I antes del sufijo ⚠️' },
+  { topic:'suf', q:'¿Qué sufijo transforma "greed" en adjetivo?', hint:'Solo una letra', a:'greed → greed<span class="good">y</span> ✅<br>También: health → health<span class="good">y</span>, luck → luck<span class="good">y</span>' },
+  { topic:'suf', q:'¿Qué sufijo forma sustantivos abstractos de adjetivos?', hint:'happy → happi___', a:'<code>-ness</code> → happi<span class="good">ness</span> ✅ (Y→I)<br>También: sad<span class="good">ness</span>, kind<span class="good">ness</span>' },
+  { topic:'suf', q:'¿Cómo se forma un sustantivo de "compete"?', hint:'-tion (con cambio)', a:'compete → competi<span class="good">tion</span> ✅<br>La "e" final desaparece ⚠️' },
+  { topic:'suf', q:'¿Qué sufijo convierte "popular" en sustantivo?', hint:'-ity', a:'popular → popular<span class="good">ity</span> ✅<br>También: national<span class="good">ity</span>, electric<span class="good">ity</span>' },
+  { topic:'suf', q:'¿Qué sufijo forma sustantivos de verbos como "enjoy"?', hint:'-ment', a:'enjoy → enjoy<span class="good">ment</span> ✅<br>También: develop<span class="good">ment</span>, amaze<span class="good">ment</span>' },
+  { topic:'pre', q:'¿Qué prefijo de negación se usa con palabras que empiezan por P, B o M?', hint:'impossible, impolite...', a:'<code>im-</code> → <span class="good">im</span>possible, <span class="good">im</span>polite, <span class="good">im</span>mature ✅' },
+  { topic:'pre', q:'¿Qué prefijo de negación se usa en la mayoría de casos?', hint:'unhappy, unfair...', a:'<code>un-</code> → <span class="good">un</span>happy, <span class="good">un</span>fair, <span class="good">un</span>kind ✅' },
+  { topic:'pre', q:'¿Qué prefijo significa "opuesto" o "deshacer"?', hint:'disagree, disappear...', a:'<code>dis-</code> → <span class="good">dis</span>agree, <span class="good">dis</span>appear, <span class="good">dis</span>honest ✅' },
+  { topic:'pre', q:'¿Qué prefijo significa "volver a hacer"?', hint:'redo, rewrite...', a:'<code>re-</code> → <span class="good">re</span>do, <span class="good">re</span>write, <span class="good">re</span>start ✅' },
+  { topic:'pre', q:'¿Qué prefijo significa "demasiado / en exceso"?', hint:'overwork, overeat...', a:'<code>over-</code> → <span class="good">over</span>work, <span class="good">over</span>eat, <span class="good">over</span>confident ✅' },
+  { topic:'spell', q:'Regla Y → I: ¿Cómo se escribe "happy + ness"?', hint:'La Y cambia antes del sufijo', a:'happy → happi<span class="good">ness</span> ✅<br><span class="bad">happyness</span> ❌<br>La Y cambia a I antes de un sufijo' },
+  { topic:'spell', q:'Regla E final: ¿Cómo se escribe "compete + ition"?', hint:'La E desaparece', a:'compete → competi<span class="good">tion</span> ✅<br><span class="bad">competeetion</span> ❌<br>La E final se elimina antes del sufijo' },
+  { topic:'spell', q:'Regla CVC (consonante doble): ¿Cómo se escribe "begin + ing"?', hint:'La consonante final se dobla', a:'begin → beginn<span class="good">ing</span> ✅<br><span class="bad">begining</span> ❌<br>CVC: la consonante final se dobla' },
+  { topic:'spell', q:'¿Cuándo se usa "im-" y cuándo "in-"?', hint:'Depende de la letra siguiente', a:'<code>im-</code> delante de P, B, M → <span class="good">im</span>possible<br><code>in-</code> en otros casos → <span class="good">in</span>correct, <span class="good">in</span>complete' },
+  { topic:'strat', q:'Paso 1 del Part 3: ¿qué pregunta debes hacerte primero?', hint:'Categoría gramatical', a:'<strong>¿Qué categoría necesito?</strong><br>¿Sustantivo / adjetivo / adverbio / verbo?<br>Mira qué función cumple el hueco en la frase' },
+  { topic:'strat', q:'Paso 3 del Part 3: ¿cuándo añadir un prefijo?', hint:'Mira el contexto', a:'Añade prefijo cuando el contexto es <strong>negativo</strong><br>Ej: "not very..." → necesitas un prefijo negativo (un-, im-, dis-)' },
+  { topic:'strat', q:'SURPRISE → "The ______ results of research"', hint:'¿Qué categoría modifica "results"?', a:'SURPRISE → <span class="good">SURPRISING</span> ✅<br>Adjetivo (modifica "results")<br>Sufijo: -ing → sin cambio de spelling' },
+];
+
+// ══════════════════════════════
+// DATA — QUIZ
+// ══════════════════════════════
+const quizData = [
+  { cat:'✅ Sufijos', q:'¿Cuál es la forma correcta de "help" como adjetivo (con sentido positivo)?', opts:['helpable','helpful','helpish','helpous'], correct:1, exp:'El sufijo -ful significa "lleno de". helpful = lleno de ayuda.' },
+  { cat:'✅ Sufijos', q:'¿Cuál es la forma correcta de "danger" como adjetivo?', opts:['dangerful','dangerous','dangerical','dangerable'], correct:1, exp:'danger + -ous = dangerous. El sufijo -ous forma adjetivos de sustantivos.' },
+  { cat:'✅ Sufijos', q:'¿Cómo se convierte "rely" en adjetivo?', opts:['relyable','relying','reliable','relyful'], correct:2, exp:'rely → reliable. La Y cambia a I antes del sufijo -able: reli+able.' },
+  { cat:'✅ Sufijos', q:'¿Cuál es el sustantivo de "happy"?', opts:['happiness','happyness','happiment','happition'], correct:0, exp:'happy → happiness. La Y cambia a I antes de -ness. NUNCA happyness.' },
+  { cat:'✅ Sufijos', q:'¿Cómo se forma el sustantivo de "compete"?', opts:['competement','competetion','competition','competeness'], correct:2, exp:'compete → competition. La E final desaparece y se añade -ition.' },
+  { cat:'✅ Sufijos', q:'"She is very ______ about her work." — ENTHUSIASM', opts:['enthusiastic','enthusiasm','enthusiastical','enthusiasming'], correct:0, exp:'ENTHUSIASM → enthusiastic. Sufijo -ic forma adjetivos. "Enthusiastical" no existe.' },
+  { cat:'✅ Sufijos', q:'"He is not very ______ with strangers." — CONFIDENCE', opts:['confidential','confiding','confident','confidence'], correct:2, exp:'CONFIDENCE → confident. Es un adjetivo que describe al sujeto. Ya tiene la forma correcta con -ent.' },
+  { cat:'🔵 Prefijos', q:'¿Cuál es el antónimo de "possible" con prefijo?', opts:['unpossible','inpossible','impossible','dispossible'], correct:2, exp:'im- se usa delante de P, B y M. impossible ✅. unpossible y inpossible no existen.' },
+  { cat:'🔵 Prefijos', q:'¿Cuál es el antónimo de "happy" con prefijo?', opts:['inhappy','dishappy','imhappy','unhappy'], correct:3, exp:'un- es el prefijo de negación más común para adjetivos. unhappy ✅.' },
+  { cat:'🔵 Prefijos', q:'¿Cuál es el antónimo de "agree" con prefijo?', opts:['unagree','inagree','disagree','reagree'], correct:2, exp:'dis- forma el opuesto de verbos y adjetivos. disagree ✅.' },
+  { cat:'🔵 Prefijos', q:'"She had to ______ the report after the boss rejected it." — WRITE', opts:['unwrite','overwrite','rewrite','inwrite'], correct:2, exp:'re- significa "volver a hacer". rewrite = volver a escribir ✅.' },
+  { cat:'⚠️ Spelling', q:'¿Cuál es la forma CORRECTA de "begin + ing"?', opts:['begining','beginning','beginng','begineing'], correct:1, exp:'Regla CVC: la consonante final se dobla antes de -ing. begin → beginning ✅.' },
+  { cat:'⚠️ Spelling', q:'¿Cuál es la forma CORRECTA de "adventure" como adjetivo?', opts:['adventureous','adventurous','adventurious','adventurefull'], correct:1, exp:'adventure → adventurous. La E final desaparece antes de -ous. ✅' },
+  { cat:'⚠️ Spelling', q:'¿Cuál es la forma CORRECTA de "polite" con prefijo negativo?', opts:['unpolite','inpolite','impolite','dispolite'], correct:2, exp:'im- se usa delante de P. impolite ✅. "Polite" empieza por P.' },
+  { cat:'🎯 Estrategia Part 3', q:'"She felt very ______ before the exam." — ANXIETY', opts:['anxious','anxiety','anxiousness','anxietying'], correct:0, exp:'ANXIETY → anxious. El hueco necesita un adjetivo (describe "she felt"). Sufijo -ous.' },
+  { cat:'🎯 Estrategia Part 3', q:'"He is known for his ______ towards others." — GENEROUS', opts:['generosity','generous','generousness','generoseful'], correct:0, exp:'GENEROUS → generosity. El hueco necesita un sustantivo. Sufijo -ity (generosity).' },
+  { cat:'🎯 Estrategia Part 3', q:'"The team was ______ in the final match." — COMPETE', opts:['competed','competing','competitive','competition'], correct:2, exp:'COMPETE → competitive. Adjetivo que describe al equipo. Sufijo -itive (con cambio de E).' },
+  { cat:'🎯 Estrategia Part 3', q:'"He spoke very ______ about the situation." — CAUTION', opts:['caution','cautiously','cautious','cautionment'], correct:1, exp:'CAUTION → cautiously. Modifica el verbo "spoke" → necesita adverbio. -ous + -ly = cautiously.' },
+];
+
+// ══════════════════════════════
+// STATE
+// ══════════════════════════════
+let curCards = [...allCards], cardIdx = 0;
+let xp = 0, lives = 3;
+let qIdx = 0, qScore = 0, answered = false, shuffledQ = [];
+
+// ══════════════════════════════
+// TABS
+// ══════════════════════════════
+function showSec(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id === 'quiz' && shuffledQ.length === 0) initQuiz();
+}
+
+// ══════════════════════════════
+// FLASHCARDS
+// ══════════════════════════════
+function filterCards(topic, btn) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  curCards = topic === 'all' ? [...allCards] : allCards.filter(c => c.topic === topic);
+  cardIdx = 0;
+  renderCard();
+}
+
+const topicColors = { suf: '#6bcb77', pre: '#4d96ff', spell: '#ff6b6b', strat: '#ffd93d' };
+
+function renderCard() {
+  const c = curCards[cardIdx];
+  document.getElementById('cardQ').textContent = c.q;
+  document.getElementById('cardHint').textContent = c.hint ? `💡 ${c.hint}` : '';
+  document.getElementById('cardA').innerHTML = c.a;
+  const back = document.getElementById('cardBack');
+  back.className = `card-face card-back ${c.topic}`;
+  const backTag = document.getElementById('cardBackTag');
+  backTag.className = `ctag ctag-back ${c.topic}`;
+  backTag.textContent = c.topic === 'suf' ? 'Sufijo' : c.topic === 'pre' ? 'Prefijo' : c.topic === 'spell' ? 'Spelling' : 'Estrategia';
+  document.getElementById('flashcard').classList.remove('flipped');
+  const pct = Math.round(((cardIdx+1)/curCards.length)*100);
+  document.getElementById('cardProg').style.width = pct + '%';
+  document.getElementById('cardCtr').textContent = `${cardIdx+1} / ${curCards.length}`;
+  document.getElementById('cardNum').textContent = `${cardIdx+1} / ${curCards.length}`;
+}
+
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  const isFlipping = !fc.classList.contains('flipped');
+  fc.classList.toggle('flipped');
+  if(isFlipping) {
+    // Play unique sound based on card index
+    const soundIdx = cardIdx % cardSounds.length;
+    cardSounds[soundIdx]();
+    addXP(5);
+    fc.classList.add('anim-rainbow');
+    setTimeout(() => fc.classList.remove('anim-rainbow'), 900);
+  } else {
+    playFlip();
+  }
+}
+
+function nextCard() {
+  cardIdx = cardIdx < curCards.length - 1 ? cardIdx + 1 : 0;
+  renderCard();
+  playTone(600, 'sine', 0.1, 0.15);
+}
+function prevCard() {
+  cardIdx = cardIdx > 0 ? cardIdx - 1 : curCards.length - 1;
+  renderCard();
+  playTone(400, 'sine', 0.1, 0.15);
+}
+
+// ══════════════════════════════
+// QUIZ
+// ══════════════════════════════
+function initQuiz() {
+  shuffledQ = [...quizData].sort(() => Math.random() - 0.5);
+  qIdx = 0; qScore = 0; lives = 3; answered = false;
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quizArea').style.display = 'block';
+  updateLives();
+  renderQ();
+}
+
+function updateLives() {
+  const hearts = ['❤️','❤️','❤️'];
+  for(let i = lives; i < 3; i++) hearts[i] = '🖤';
+  document.getElementById('lives').textContent = hearts.join('');
+}
+
+function renderQ() {
+  if(qIdx >= shuffledQ.length) { showResults(); return; }
+  const q = shuffledQ[qIdx];
+  answered = false;
+  document.getElementById('qCat').innerHTML = q.cat;
+  document.getElementById('qText').innerHTML = q.q;
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('btnCont').className = 'btn btn-cont';
+  const optsEl = document.getElementById('qOpts');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'q-opt'; b.innerHTML = opt;
+    b.onclick = () => selectAns(i, q.correct, q.exp);
+    optsEl.appendChild(b);
+  });
+  const pct = Math.round((qIdx/shuffledQ.length)*100);
+  document.getElementById('quizProg').style.width = pct + '%';
+  document.getElementById('quizCtr').textContent = `${qIdx+1} / ${shuffledQ.length}`;
+}
+
+function selectAns(chosen, correct, exp) {
+  if(answered) return;
+  answered = true;
+  const opts = document.querySelectorAll('.q-opt');
+  opts.forEach(o => o.disabled = true);
+  opts[correct].classList.add('correct');
+  const fb = document.getElementById('feedback');
+  const card = document.getElementById('quizCard');
+
+  if(chosen === correct) {
+    opts[chosen].classList.add('correct');
+    fb.className = 'feedback show fb-correct';
+    document.getElementById('fbIcon').textContent = getRandomCorrectEmoji();
+    document.getElementById('fbText').innerHTML = `<strong>¡Correcto! 🎉</strong>${exp}`;
+    qScore++;
+    addXP(25);
+    playCorrect();
+    spawnConfetti(event);
+    spawnEmojiBurst(event);
+    card.classList.add('anim-bounce');
+    setTimeout(() => card.classList.remove('anim-bounce'), 600);
+  } else {
+    opts[chosen].classList.add('wrong');
+    fb.className = 'feedback show fb-wrong';
+    document.getElementById('fbIcon').textContent = '💥';
+    document.getElementById('fbText').innerHTML = `<strong>Incorrecto</strong>${exp}`;
+    lives = Math.max(0, lives - 1);
+    updateLives();
+    playWrong();
+    card.classList.add('anim-shake');
+    setTimeout(() => card.classList.remove('anim-shake'), 500);
+  }
+  document.getElementById('btnCont').className = 'btn btn-cont show';
+}
+
+function nextQ() {
+  qIdx++;
+  if(qIdx >= shuffledQ.length) { showResults(); return; }
+  renderQ();
+}
+
+function showResults() {
+  document.getElementById('quizArea').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  const pct = Math.round((qScore/shuffledQ.length)*100);
+  document.getElementById('resCorrect').textContent = qScore;
+  document.getElementById('resTotal').textContent = shuffledQ.length;
+  document.getElementById('quizProg').style.width = '100%';
+  let emoji, title, msg;
+  if(pct===100) { emoji='🏆'; title='¡PERFECTO!'; msg='¡Dominas los prefijos y sufijos! ¡Eres un crack del B2!'; }
+  else if(pct>=80) { emoji='🥇'; title='¡Excelente!'; msg='Muy buen nivel. Repasa los fallos y vuelve a por el 100%.'; }
+  else if(pct>=60) { emoji='🥈'; title='¡Bien!'; msg='Buen trabajo. Refuerza las tarjetas de spelling y vuelve.'; }
+  else { emoji='💪'; title='Sigue practicando'; msg='Repasa el resumen y las flashcards. ¡Tú puedes!'; }
+  document.getElementById('resEmoji').textContent = emoji;
+  document.getElementById('resTitle').textContent = title;
+  document.getElementById('resMsg').textContent = msg;
+  playLevelUp();
+  setTimeout(() => spawnMassConfetti(), 300);
+  addXP(60);
+}
+
+function restartQuiz() {
+  shuffledQ = [];
+  initQuiz();
+}
+
+// ══════════════════════════════
+// CORRECT EMOJIS (random)
+// ══════════════════════════════
+const correctEmojis = ['🎉','⭐','🔥','💯','🚀','🎯','✨','🏆','💪','🥳'];
+function getRandomCorrectEmoji() {
+  return correctEmojis[Math.floor(Math.random()*correctEmojis.length)];
+}
+
+// ══════════════════════════════
+// CONFETTI
+// ══════════════════════════════
+function spawnConfetti(e) {
+  const cx = e ? e.clientX : window.innerWidth/2;
+  const cy = e ? e.clientY : window.innerHeight/2;
+  for(let i = 0; i < 30; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left:${cx + (Math.random()-0.5)*200}px;
+      top:${cy}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      transform:rotate(${Math.random()*360}deg);
+      animation-duration:${Math.random()*1.5+1}s;
+      animation-delay:${Math.random()*0.3}s;
+      width:${Math.random()*10+5}px;
+      height:${Math.random()*10+5}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+}
+
+function spawnMassConfetti() {
+  for(let i = 0; i < 80; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left:${Math.random()*100}vw; top:-10px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${Math.random()*2+2}s;
+      animation-delay:${Math.random()*1}s;
+      width:${Math.random()*12+4}px; height:${Math.random()*12+4}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 4000);
+  }
+}
+
+function spawnEmojiBurst(e) {
+  const emojis = ['⭐','🔥','💯','✨','🎯','💪','🚀','🎉'];
+  const cx = e ? e.clientX : window.innerWidth/2;
+  const cy = e ? e.clientY : window.innerHeight/2;
+  for(let i = 0; i < 6; i++) {
+    const el = document.createElement('div');
+    el.className = 'emoji-burst';
+    const angle = (i/6)*Math.PI*2;
+    const dist = 80 + Math.random()*60;
+    el.style.cssText = `
+      left:${cx}px; top:${cy}px;
+      --dx:${Math.cos(angle)*dist}px;
+      --dy:${Math.sin(angle)*dist}px;
+      animation-duration:${0.8+Math.random()*0.4}s;
+    `;
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1500);
+  }
+}
+
+// ══════════════════════════════
+// XP
+// ══════════════════════════════
+function addXP(amt) {
+  xp += amt;
+  document.getElementById('xpNum').textContent = xp;
+  const pct = Math.min((xp % 300)/300*100, 100);
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+
+// ── INIT ──
+renderCard();
+</script>
+</body>
+</html>
